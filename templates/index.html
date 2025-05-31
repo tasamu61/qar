@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>旅行先AIデモ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?ver={{ time }}">
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>旅行先AIデモ</h1>
+    <p>このツールでは、簡単なアンケートに答えるだけで、おすすめの旅行先をAIが提案します。</p>
+    <div style="display: flex; align-items: center; gap: 32px; margin-bottom: 12px;">
+    <button id="start-button-t" :disabled="starting">アンケート開始</button>
+    <a href="{{ url_for('some') }}" target="_blank" style="font-weight: bold; color: #1976d2;">
+      こんなのもあるよ!
+    </a>
+    <a href="#" style="font-weight: bold; color: #607d8b; text-decoration: underline;">
+      面倒くさい中身の話
+    </a>
+  </div>
+
+    <form id="questionsArea">
+      <input type="hidden" value="旅行先" id="title">
+ 
+      <!-- Vueが描画する領域 -->
+      <div id="vue-question-area" v-cloak>
+        {% raw %}
+        <div v-if="questions.length">
+          <div class="section-header">アンケートに答えてください</div>
+
+          <div v-for="q in questions" :key="q.id" class="question-block">
+            <p>{{ q.text }}</p>
+
+            <select v-if="q.type === 'single'" :name="'q' + q.id" v-model="formValues['q' + q.id]">
+              <option value="">選択してください</option>
+              <option v-for="choice in q.choices" :value="choice">{{ choice }}</option>
+            </select>
+
+            <div v-if="q.type === 'multiple'" class="choices-container">
+              <label v-for="choice in q.choices" :key="choice">
+                <input type="checkbox" :value="choice" :name="'q' + q.id" :checked="formValues['q' + q.id]?.includes(choice)" @change="handleCheckboxChange(q.id, choice, $event)">
+                {{ choice }}
+              </label>
+            </div>
+
+            <input v-if="q.type === 'text'" type="text" :name="'q' + q.id" v-model="formValues['q' + q.id]" />
+            <textarea v-if="q.type === 'text1'" :name="'q' + q.id" rows="4" cols="50" placeholder="ここに入力してください" v-model="formValues['q' + q.id]"></textarea>
+          </div>
+
+          <!-- 送信ボタン -->
+          
+          <div style="margin-top: 20px; display: flex; gap: 12px;">
+            AIを変更して検討できます「self」は自営ですが、まだまだです。
+            <button
+              v-for="name in ['openai', 'google', 'self']"
+              :key="name"
+              type="button"
+              :disabled="sending"
+              @click="getResult(name)">
+              送信({{ name }})
+            </button>
+          </div>
+        </div>
+
+        <!-- 結果表示エリア -->
+        <div v-if="result.length" class="results" style="margin-top: 30px;">
+          <hr>
+          <div class="results-header">
+            <h3>おすすめの提案</h3>
+          </div>
+          <ul>
+            <li v-for="rec in result" :key="rec.destination" class="result-item">
+              <strong>{{ rec.destination }}（スコア: {{ rec.score }}）</strong>
+              <p>{{ rec.description }}</p>
+              <a :href="rec.url" target="_blank">{{ rec.url }}</a>
+              <a :href="rec.googleSearchUrl" target="_blank" style="display: block; margin-top: 0.2em;">
+                {{ rec.destination }} をこの条件でGoogle検索
+              </a>
+            </li>
+          </ul>
+          <div style="margin-top: 24px; display: flex; align-items: center; gap: 20px;">
+            <button type="button" id="retry-button" style="font-weight: bold;"  @click="scrollToTop">再度回答する</button>
+          </div>
+        </div>
+        {% endraw %}
+      </div>
+    </form>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}?ver={{ time }}"></script>
+  <script src="{{ url_for('static', filename='vue_app.js') }}?ver={{ time }}"></script>
+</body>
+</html>

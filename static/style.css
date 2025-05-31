@@ -1,0 +1,211 @@
+/* === コンパクトだけど見やすさも意識した旅行イメージデザイン === */
+
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  line-height: 1.2;
+}
+
+.container {
+  max-width: 700px;
+  margin: 24px auto;
+  padding: 16px 16px;
+  background: rgba(255,255,255,0.97);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 128, 255, 0.06);
+  border: 1px solid #b3e5fc;
+}
+
+/* タイトル前後にシンボル */
+h1::before { content: "✈️ "; font-size: 1.1em; }
+h1::after { content: " 🏝️"; font-size: 1.1em; }
+
+/* 説明文の前に地図 */
+.container > p::before {
+  content: "🗺️ ";
+  font-size: 1.2em;
+  margin-right: 0.2em;
+}
+
+/* アンケート開始ボタンの前に飛行機 */
+#start-button-t::before {
+  content: "🛫 ";
+  font-size: 1em;
+  margin-right: 0.3em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 「こんなのもあるよ!」リンクの後ろにバス */
+a[href*="some"]::after {
+  content: " 🚌";
+  font-size: 1em;
+}
+
+/* 「面倒くさい中身の話」リンクの前に虫眼鏡 */
+a[href="#"]::before {
+  content: "🔍 ";
+  font-size: 1em;
+}
+
+/* セクションタイトルや結果見出し */
+.section-header,
+.results-header h3 {
+  color: #0288d1;
+  font-size: 1.08em;
+  font-weight: bold;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+}
+.section-header::before { content: "🧳 "; font-size: 1em; }
+.results-header h3::before { content: "🌏 "; font-size: 1em; }
+
+/* 「おすすめの提案」見出しの後ろに山 */
+.results-header h3::after {
+  content: " 🏔️";
+  font-size: 1.1em;
+}
+
+.results,
+.question-block {
+  background: #e3f2fd;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(2,136,209,0.06);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid #b3e5fc;
+}
+
+.question-block {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  min-height: 32px;
+}
+.question-block p {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 1em;
+  display: inline-block;
+  font-weight: 500;
+}
+.question-block input[type="text"],
+.question-block select {
+  margin: 0 4px;
+  padding: 2px 8px;
+  font-size: 1em;
+  display: inline-block;
+  height: 28px;
+}
+.question-block label {
+  margin-right: 8px;
+  font-size: 1em;
+  display: inline-block;
+}
+.choices-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  row-gap: 2px;
+}
+
+.results ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.result-item {
+  border-bottom: 1px dashed #81d4fa;
+  padding: 7px 0;
+  background: #ffffffcc;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.result-item:last-child { border-bottom: none; }
+.result-item h3 {
+  margin: 0 0 2px 0;
+  color: #2a7ae2;
+  line-height: 1.15;
+  font-size: 1.05em;
+}
+.result-item p {
+  margin: 2px 0;
+  color: #555;
+  line-height: 1.15;
+  font-size: 1em;
+}
+
+button, .btn {
+  background: linear-gradient(90deg, #4fc3f7 0%, #0288d1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 7px 18px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(2,136,209,0.06);
+  transition: background 0.2s, transform 0.2s;
+  line-height: 1.15;
+}
+button:hover, .btn:hover {
+  background: linear-gradient(90deg, #0288d1 0%, #4fc3f7 100%);
+  transform: translateY(-1px) scale(1.03);
+}
+button:disabled {
+  background: #b0bec5;
+  cursor: not-allowed;
+}
+
+.results .results-actions,
+.results > div[style*="display: flex"] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.section-header {
+  border-top: 1px solid #ccc;
+  padding-top: 6px;
+  margin-top: 16px;
+  font-size: 1.05em;
+  font-weight: bold;
+  line-height: 1.15;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    max-width: 99%;
+    padding: 8px;
+  }
+  .results, .question-block {
+    padding: 8px;
+  }
+  [v-cloak] {
+    display: none !important;
+    background-color: red !important;
+  }
+}
+
+/* 送信ボタン（例: type="submit"や.btn-sendなど）に出発イメージのシンボルを追加 */
+button[type="submit"]::before,
+.btn-send::before {
+  content: "🚀 ";
+  font-size: 1em;
+  margin-right: 0.3em;
+  display: inline-block;
+  vertical-align: middle;
+}

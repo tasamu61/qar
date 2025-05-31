@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>任意テーマでのAI提案デモ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='some.css') }}?ver={{ time }}">
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+    /* 新規追加：入力エリアのスタイル */
+    #extraInputs {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    #extraInputs div {
+      margin-bottom: 8px;
+    }
+    #extraInputs label {
+      display: inline-block;
+      width: 200px;
+      font-weight: bold;
+    }
+    #extraInputs input, 
+    #extraInputs textarea {
+      width: calc(100% - 210px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>なんでもAI提案デモ</h1>
+<p>
+  ここでは任意のテーマについてAIがアンケートを生成して、それに答えるとそのテーマでの最適なものをAIが提案します。
+  「テーマ」やテーマにそった「AIへの指示事項」、「回答送信時にAIへの指示事項」,
+  あるいは回答者（あなた？）へのアドバイスを入力してください。<br>
+  回答者へのアドバイスはAIは参照しません。
+  <a href="#" id="usage-link">簡単な使い方はこちら</a>
+  アンケート文はopenaiでしか生成できませんが、その回答内容をもとにした提案はopenai, google, 
+  自営のAIのいずれかを選択できますが、自営は今のところほとんど機能してません<br>
+</p>
+
+    <!-- 新規追加：増えた項目の入力エリア -->
+    <div id="extraInputs">
+      <div>
+        <label for="theme">テーマ (20文字以内):</label>
+        <input type="text" id="theme" maxlength="20" placeholder="例：旅行先">
+      </div>
+      <div>
+        <label for="instruction">AIへのテーマ別の指示 (200文字以内):</label>
+        <textarea id="instruction" rows="3" maxlength="200" placeholder="例：『出発場所』は語入力、『日程』『金額』は単選択"></textarea>
+      </div>
+      <div>
+        <label for="sendInstruction">AIへの回答送信時の指示 (200文字以内):</label>
+        <textarea id="sendInstruction" rows="3" maxlength="200" placeholder="例：空欄なら一般的な妥当な内容を"></textarea>
+      </div>
+      <div>
+        <label for="userAdvice">回答者へのアドバイス (200文字以内):</label>
+        <textarea id="userAdvice" rows="3" maxlength="200" placeholder="例：わからない場合は空欄でOK"></textarea>
+      </div>
+    </div>
+
+    <!-- ...既存のコード... -->
+<button id="button-openai">アンケート開始(openai)</button>
+<button id="button-google">アンケート開始(google)</button>
+<button id="button-self">アンケート開始(self)</button>
+<!-- ...既存のコード... -->
+
+    <form id="questionsArea">
+      <input type="hidden" value="旅行先" id="title">
+
+      <!-- Vueが描画する領域 -->
+      <div id="vue-question-area" v-cloak>
+        {% raw %}
+        <div v-if="questions.length">
+          <div class="section-header">アンケートに答えてください</div>
+
+          <div v-for="q in questions" :key="q.id" class="question-block">
+            <p>{{ q.text }}</p>
+
+            <select v-if="q.type === 'single'" :name="'q' + q.id" v-model="formValues['q' + q.id]">
+              <option value="">選択してください</option>
+              <option v-for="choice in q.choices" :value="choice">{{ choice }}</option>
+            </select>
+
+            <div v-if="q.type === 'multiple'" class="choices-container">
+              <label v-for="choice in q.choices" :key="choice">
+                <input type="checkbox" v-model="formValues['q' + q.id]" :value="choice">
+                {{ choice }}
+              </label>
+            </div>
+
+            <input v-if="q.type === 'text'" type="text" :name="'q' + q.id" v-model="formValues['q' + q.id]" />
+            <textarea v-if="q.type === 'text1'" :name="'q' + q.id" rows="4" cols="50" placeholder="ここに入力してください"
+              v-model="formValues['q' + q.id]"></textarea>
+          </div>
+
+          <!-- 送信ボタン -->
+          <div style="margin-top: 20px; display: flex; gap: 12px;">
+            <button v-for="name in ['openai', 'google', 'self']" :key="name" type="button"
+              :disabled="sending" @click="getResult(name)">
+              送信({{ name }})
+            </button>
+          </div>
+        </div>
+
+        <!-- 結果表示エリア -->
+        <div v-if="result.length" class="results" style="margin-top: 30px;">
+          <div class="results-header">
+            <h3>おすすめの提案</h3>
+          </div>
+          <ul>
+            <li v-for="rec in result" :key="rec.destination" class="result-item">
+              <strong>{{ rec.destination }}（スコア: {{ rec.score }}）</strong>
+              <p>{{ rec.description }}</p>
+              <a :href="rec.url" target="_blank">{{ rec.url }}</a>
+              <a :href="rec.googleSearchUrl" target="_blank" style="display: block; margin-top: 0.2em;">
+                {{ rec.destination }} をこの条件でGoogle検索
+              </a>
+            </li>
+          </ul>
+          <button type="button" id="retry-button" style="font-weight: bold; margin-top: 16px; margin-right: 16px;" @click="scrollToTop">
+            再度回答する
+          </button>
+          <button type="button" class="btn" onclick="scrollToThemeInput()">テーマ入力から再度</button>
+        
+        </div>
+
+        {% endraw %}
+      </div>
+    </form>
+  </div>
+
+
+
+<script>
+  function setStartButtonsDisabled(disabled) {
+    ['button-openai', 'button-google', 'button-self'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) btn.disabled = disabled;
+    });
+  }
+  function scrollToThemeInput() {
+    // アンケート開始ボタンをenable
+    setStartButtonsDisabled(false);
+    // テーマ入力欄のIDが"theme"の場合
+    const themeInput = document.getElementById('extraInputs');
+    if (themeInput) {
+      themeInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      themeInput.focus();
+    } else {
+      // なければページトップへ
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+  // 3つのボタンをまとめてdisableする関数
+  function setStartButtonsDisabled(disabled) {
+    ['button-openai', 'button-google', 'button-self'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) btn.disabled = disabled;
+    });
+  }
+
+  // 各ボタンのクリック時に全てdisable
+  ['button-openai', 'button-google', 'button-self'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
+      btn.addEventListener('click', () => setStartButtonsDisabled(true));
+    }
+  });
+
+    function setStartButtonsDisabled(disabled) {
+    ['button-openai', 'button-google', 'button-self'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) btn.disabled = disabled;
+    });
+  }
+</script>
+
+
+  <!-- JavaScript -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}?ver={{ time }}"></script>
+  <script src="{{ url_for('static', filename='vue_app.js') }}?ver={{ time }}"></script>
+
+  <script>
+
+document.getElementById('usage-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.open(
+    "{{ url_for('static', filename='usage.html') }}",
+    "usageGuide",
+    "width=500,height=500,menubar=no,toolbar=no,location=no,status=no"
+  );
+});
+</script>
+
+</body>
+
+</html>

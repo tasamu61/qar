@@ -1,0 +1,332 @@
+h2 {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.question-block {
+  margin-bottom: 8px;
+}
+
+.question-block p {
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+  font-size: 0.95em;
+}
+
+.question-block input[type="text"],
+.question-block select {
+  margin-bottom: 4px;
+  padding: 4px 6px;
+  font-size: 0.95em;
+}
+
+.question-block label {
+  margin-right: 10px;
+  font-size: 0.95em;
+}
+
+.choices-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.question {
+  margin-bottom: 15px;
+}
+
+.question p {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.results {
+  margin-top: 25px;
+}
+
+.result-item {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fafafa;
+}
+
+.result-item h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: #2a7ae2;
+}
+
+.result-item p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* アンケートと結果見出しの上に線を引く */
+.section-header {
+  border-top: 2px solid #ccc;
+  padding-top: 10px;
+  margin-top: 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#resultsArea>button {
+  list-style: none;
+  /* 念のため */
+  display: inline-block;
+  /* または block */
+  margin: 20px 0;
+}
+
+.question-block {
+  margin-bottom: 16px;
+  /* 質問ブロック間の余白を設定 */
+}
+
+.question-block p {
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+  font-size: 0.95em;
+}
+
+.question-block input[type="text"],
+.question-block select {
+  margin-bottom: 4px;
+  padding: 4px 6px;
+  font-size: 0.95em;
+}
+
+.question-block label {
+  margin-right: 10px;
+  font-size: 0.95em;
+}
+
+.choices-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.choices-container {
+  row-gap: 4px;
+}
+
+#resultsArea li {
+  line-height: 1.2;
+  margin-bottom: 0.8em;
+}
+
+#resultsArea li p {
+    margin: 0;
+}
+
+#resultsArea li a {
+  display: inline-block;
+  margin: 0;
+}
+
+#resultsArea ul {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#resultsArea li {
+    margin-bottom: 0.8em;
+  /* 必要ならマーカーを内側に揃える */
+}
+
+/* ベース背景とコンテナ */
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+  margin: 0;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 720px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(33, 150, 243, 0.10);
+  border: 1px solid #b3e5fc;
+  padding: 28px 24px;
+}
+
+/* タイトルにアイコン */
+h1::before {
+  content: "💡 ";
+  font-size: 1.1em;
+}
+h1::after {
+  content: " 🤖";
+  font-size: 1.1em;
+}
+
+/* 説明文に色とアイコン */
+.container > p {
+  background: #e3f2fd;
+  border-left: 5px solid #1976d2;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #1565c0;
+  margin-bottom: 18px;
+  font-size: 1.05em;
+  position: relative;
+}
+.container > p::before {
+  content: "📝 ";
+  font-size: 1.2em;
+  margin-right: 0.2em;
+}
+
+/* 入力エリア */
+#extraInputs label {
+  font-weight: bold;
+  color: #1976d2;
+}
+#extraInputs input[type="text"],
+#extraInputs textarea {
+  border: 1px solid #b3e5fc;
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  font-size: 1em;
+  background: #fafdff;
+  transition: border 0.2s;
+}
+#extraInputs input[type="text"]:focus,
+#extraInputs textarea:focus {
+  border: 1.5px solid #1976d2;
+  outline: none;
+}
+
+/* ボタン */
+button, .btn {
+  background: linear-gradient(90deg, #64b5f6 0%, #1976d2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 8px 22px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(33,150,243,0.08);
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 8px;
+}
+button:hover, .btn:hover {
+  background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+  transform: translateY(-1px) scale(1.03);
+}
+button:disabled {
+  background: #b0bec5;
+  cursor: not-allowed;
+}
+
+/* アンケートや結果のブロック */
+.section-header,
+.results-header h3 {
+  color: #1976d2;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+}
+.section-header::before { content: "📝 "; font-size: 1em; }
+.results-header h3::before { content: "✨ "; font-size: 1em; }
+
+.results,
+.question-block {
+  background: #fafdff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(33,150,243,0.06);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid #b3e5fc;
+}
+
+/* 質問ブロックの余白・インライン化 */
+.question-block {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  min-height: 32px;
+}
+.question-block p {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 1em;
+  display: inline-block;
+  font-weight: 500;
+}
+.question-block input[type="text"],
+.question-block select {
+  margin: 0 4px;
+  padding: 2px 8px;
+  font-size: 1em;
+  display: inline-block;
+  height: 28px;
+}
+.question-block label {
+  margin-right: 8px;
+  font-size: 1em;
+  display: inline-block;
+}
+.choices-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  row-gap: 2px;
+}
+
+/* 結果リスト */
+.results ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.result-item {
+  border-bottom: 1px dashed #81d4fa;
+  padding: 7px 0;
+  background: #ffffffcc;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  line-height: 1.15;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.result-item:last-child { border-bottom: none; }
+.result-item h3 {
+  margin: 0 0 2px 0;
+  color: #2a7ae2;
+  line-height: 1.15;
+  font-size: 1.05em;
+}
+.result-item p {
+  margin: 2px 0;
+  color: #555;
+  line-height: 1.15;
+  font-size: 1em;
+}
+
+/* レスポンシブ */
+@media screen and (max-width: 700px) {
+  .container {
+    max-width: 99%;
+    padding: 8px;
+  }
+  .results, .question-block {
+    padding: 8px;
+  }
+}

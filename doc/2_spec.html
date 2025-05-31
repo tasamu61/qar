@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>2. 現状の仕様</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>2. 現状の仕様</h1>
+  <ul>
+    <li>構成：HTML + JavaScript（Vue未使用） + Flask</li>
+    <li>処理フロー：
+      <ol>
+        <li>「旅行条件（例：予算、人数など）」をブラウザからAIに送信</li>
+        <li>AIから質問群をJSONで受信</li>
+        <li>各質問に対する回答をブラウザ上で入力し、JSON形式でサーバに送信</li>
+        <li>サーバ経由でAIに渡し、提案結果（文章）を受け取って表示</li>
+      </ol>
+    </li>
+    <li>AI呼び出しには OpenAI API の Function calling または JSONモードを使用</li>
+    <li>最終的には ChatGPT 以外のAIへの切替も視野に入れて構成</li>
+  </ul>
+  <p><a href="index.html">← 戻る</a></p>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue 入門デモ</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{ message }}</h2>
+
+    <input v-model="userInput" placeholder="入力してください" />
+    <p>あなたの入力: {{ userInput }}</p>
+
+    <button @click="reverseText">文字を逆にする</button>
+    <p>逆にした文字: {{ reversed }}</p>
+  </div>
+gi
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          message: "こんにちは、Vueの世界！",
+          userInput: ""
+        };
+      },
+      computed: {
+        reversed() {
+          return this.userInput.split("").reverse().join("");
+        }
+      },
+      methods: {
+        reverseText() {
+          alert(`逆文字: ${this.reversed}`);
+        }
+      }
+    }).mount("#app");
+  </script>
+</body>
+</html>
