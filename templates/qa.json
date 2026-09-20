@@ -4,7 +4,7 @@
   },
   "functions": [
     {
-      "description": "アンケートに使用する質問リストを生成します。",
+      "description": "質問に使用する質問リストを生成します。",
       "name": "create_questions",
       "parameters": {
         "properties": {

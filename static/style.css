@@ -32,7 +32,7 @@ h1::after { content: " 🏝️"; font-size: 1.1em; }
   margin-right: 0.2em;
 }
 
-/* アンケート開始ボタンの前に飛行機 */
+/* 質問開始ボタンの前に飛行機 */
 #start-button-t::before {
   content: "🛫 ";
   font-size: 1em;

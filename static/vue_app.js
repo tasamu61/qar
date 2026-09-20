@@ -14,6 +14,7 @@ createApp({
     const aiTypes = [
       { id: 'button-openai', llm: 'openai' },
       { id: 'button-google', llm: 'google' },
+      { id: 'button-groq', llm: 'groq' },
       { id: 'button-self', llm: 'self' }
     ]
     aiTypes.forEach(({ id, llm }) => {
@@ -52,6 +53,19 @@ createApp({
   },
 
   methods: {
+    handleFetchResponse (res) {
+      if (res.status === 429) {
+        alert('ビジーです。再度実行してください')
+        throw new Error('Too Many Requests')
+      } else if (res.status === 403) {
+        alert('エラー発生。トップ画面からやり直してください')
+        throw new Error('Service Unavailable')
+      } else if (res.status !== 200) {
+        alert('エラー発生')
+        throw new Error(`HTTP error: ${res.status}`)
+      }
+      return res
+    },
     /* `loadQuestions` is a method in the Vue app that is responsible for fetching questions from the
     server based on a specified theme. Here is a breakdown of what `loadQuestions` is doing: */
     loadQuestions (theme, llmType = 'openai') {
@@ -77,6 +91,7 @@ createApp({
           ...extraData
         })
       })
+        .then(this.handleFetchResponse)
         .then(res => res.json())
         .then(data => {
           this.questions = data.questions || []
@@ -97,18 +112,24 @@ createApp({
           })
         })
         .catch(err => {
+          alert('質問の取得に失敗しました。')
           console.error('質問取得失敗:', err)
         })
     },
 
     getResult (llmType) {
       this.sending = true
+      const extraData = {
+        title: document.getElementById('title')?.value.trim() || '',
+        theme: document.getElementById('theme')?.value.trim() || '',
+        instruction: document.getElementById('instruction')?.value.trim() || '',
+        sendInstruction:
+          document.getElementById('sendInstruction')?.value.trim() || '',
+        userAdvice: document.getElementById('userAdvice')?.value.trim() || ''
+      }
 
       const answers = this.questions.map(q => {
         let value = this.formValues['q' + q.id]
-        // if (q.type === "multiple" && Array.isArray(value)) {
-        //   value = value.join(", ");
-        // }
         return {
           question: q.text,
           answer: value || ''
@@ -118,8 +139,11 @@ createApp({
       const payload = {
         answer: {
           theme: document.getElementById('theme')?.value || '',
+          sendInstruction:
+            document.getElementById('sendInstruction')?.value || '',
           aillm: llmType,
-          answers: answers
+          answers: answers,
+          ...extraData
         }
       }
 
@@ -128,12 +152,14 @@ createApp({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       })
+        .then(this.handleFetchResponse)
         .then(res => res.json())
         .then(data => {
           this.displayResult(data.result)
         })
         .catch(err => {
-          console.error('送信失敗:', err)
+          alert('結果取得に失敗しました。')
+          console.error('結果取得失敗:', err)
         })
         .finally(() => {
           this.sending = false

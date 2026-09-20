@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>任意テーマでのAI提案デモ</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/favicona.png') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ url_for('static', filename='some.css') }}?ver={{ time }}">
   <style>
     [v-cloak] {
@@ -34,12 +35,12 @@
   <div class="container">
     <h1>なんでもAI提案デモ</h1>
 <p>
-  ここでは任意のテーマについてAIがアンケートを生成して、それに答えるとそのテーマでの最適なものをAIが提案します。
+  ここでは任意のテーマについてAIが質問を生成して、それに答えるとそのテーマでの最適なものをAIが提案します。
   「テーマ」やテーマにそった「AIへの指示事項」、「回答送信時にAIへの指示事項」,
   あるいは回答者（あなた？）へのアドバイスを入力してください。<br>
   回答者へのアドバイスはAIは参照しません。
-  <a href="#" id="usage-link">簡単な使い方はこちら</a>
-  アンケート文はopenaiでしか生成できませんが、その回答内容をもとにした提案はopenai, google, 
+  <a href="#" id="usage-link">設定例はこちら</a>
+  質問生成、その回答内容をもとにした提案はopenai, google, groq.com
   自営のAIのいずれかを選択できますが、自営は今のところほとんど機能してません<br>
 </p>
 
@@ -50,11 +51,11 @@
         <input type="text" id="theme" maxlength="20" placeholder="例：旅行先">
       </div>
       <div>
-        <label for="instruction">AIへのテーマ別の指示 (200文字以内):</label>
+        <label for="instruction">AIへのテーマ別の質問作成指示 (200文字以内):</label>
         <textarea id="instruction" rows="3" maxlength="200" placeholder="例：『出発場所』は語入力、『日程』『金額』は単選択"></textarea>
       </div>
       <div>
-        <label for="sendInstruction">AIへの回答送信時の指示 (200文字以内):</label>
+        <label for="sendInstruction">AIへの提案作成時の指示 (200文字以内):</label>
         <textarea id="sendInstruction" rows="3" maxlength="200" placeholder="例：空欄なら一般的な妥当な内容を"></textarea>
       </div>
       <div>
@@ -64,19 +65,20 @@
     </div>
 
     <!-- ...既存のコード... -->
-<button id="button-openai">アンケート開始(openai)</button>
-<button id="button-google">アンケート開始(google)</button>
-<button id="button-self">アンケート開始(self)</button>
+<button id="button-openai">質問開始(openai)</button>
+<button id="button-google">質問開始(google)</button>
+<button id="button-groq">質問開始(groq.com)</button>
+<button id="button-self">質問開始(self)</button>
 <!-- ...既存のコード... -->
 
     <form id="questionsArea">
-      <input type="hidden" value="旅行先" id="title">
+      <input type="hidden" value="some" id="title">
 
       <!-- Vueが描画する領域 -->
       <div id="vue-question-area" v-cloak>
         {% raw %}
         <div v-if="questions.length">
-          <div class="section-header">アンケートに答えてください</div>
+          <div class="section-header">質問に答えてください</div>
 
           <div v-for="q in questions" :key="q.id" class="question-block">
             <p>{{ q.text }}</p>
@@ -100,7 +102,7 @@
 
           <!-- 送信ボタン -->
           <div style="margin-top: 20px; display: flex; gap: 12px;">
-            <button v-for="name in ['openai', 'google', 'self']" :key="name" type="button"
+            <button v-for="name in ['openai', 'google','groq', 'self']" :key="name" type="button"
               :disabled="sending" @click="getResult(name)">
               送信({{ name }})
             </button>
@@ -137,14 +139,39 @@
 
 
 <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            // 代入する要素のIDとURLパラメータのキー名を定義
+            const paramMap = {
+                'theme': 'theme',
+                'instruction': 'instruction',
+                'sendInstruction': 'sendInstruction',
+                'userAdvice': 'userAdvice'
+            };
+
+            // 各IDに対応するinput要素に値を代入
+            for (const id in paramMap) {
+                const paramName = paramMap[id];
+                const value = urlParams.get(paramName);
+                const inputElement = document.getElementById(id);
+
+                if (value !== null && inputElement) {
+                    inputElement.value = decodeURIComponent(value);
+                }
+            }
+        });
+
+
   function setStartButtonsDisabled(disabled) {
-    ['button-openai', 'button-google', 'button-self'].forEach(id => {
+    ['button-openai', 'button-google','button-groq', 'button-self'].forEach(id => {
       const btn = document.getElementById(id);
       if (btn) btn.disabled = disabled;
     });
   }
   function scrollToThemeInput() {
-    // アンケート開始ボタンをenable
+    // 質問開始ボタンをenable
     setStartButtonsDisabled(false);
     // テーマ入力欄のIDが"theme"の場合
     const themeInput = document.getElementById('extraInputs');
@@ -158,14 +185,14 @@
   }
   // 3つのボタンをまとめてdisableする関数
   function setStartButtonsDisabled(disabled) {
-    ['button-openai', 'button-google', 'button-self'].forEach(id => {
+    ['button-openai', 'button-google','button-groq', 'button-self'].forEach(id => {
       const btn = document.getElementById(id);
       if (btn) btn.disabled = disabled;
     });
   }
 
   // 各ボタンのクリック時に全てdisable
-  ['button-openai', 'button-google', 'button-self'].forEach(id => {
+  ['button-openai', 'button-google', 'button-groq', 'button-self'].forEach(id => {
     const btn = document.getElementById(id);
     if (btn) {
       btn.addEventListener('click', () => setStartButtonsDisabled(true));
@@ -173,7 +200,7 @@
   });
 
     function setStartButtonsDisabled(disabled) {
-    ['button-openai', 'button-google', 'button-self'].forEach(id => {
+    ['button-openai', 'button-google','button-groq', 'button-self'].forEach(id => {
       const btn = document.getElementById(id);
       if (btn) btn.disabled = disabled;
     });
@@ -197,7 +224,6 @@ document.getElementById('usage-link').addEventListener('click', function(e) {
   );
 });
 </script>
-
 </body>
 
 </html>

@@ -1,147 +1,158 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>簡単な使い方</title>
-  <style>
-    body { font-family: 'Segoe UI', 'Meiryo', sans-serif; padding: 24px; background: #fafdff; }
-    h2 { color: #1976d2; }
-    .sample-box {
-      background: #e3f2fd;
-      border-left: 4px solid #1976d2;
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin: 18px 0;
-    }
-    .copy-btn, .close-btn {
-      background: #1976d2;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 4px 14px;
-      font-size: 0.98em;
-      cursor: pointer;
-      margin-left: 8px;
-      margin-top: 8px;
-    }
-    .copy-btn:active, .close-btn:active {
-      background: #1565c0;
-    }
-    .sample-title {
-      font-weight: bold;
-      color: #1976d2;
-      margin-top: 10px;
-      display: inline-block;
-    }
-    .sample-label {
-      color: #1565c0;
-      font-weight: bold;
-      margin-right: 4px;
-    }
-    .sample-row {
-      margin-bottom: 4px;
-    }
-    .center {
-      text-align: center;
-      margin-top: 32px;
-    }
-  </style>
-</head>
-<body>
-  <h2>簡単な使い方</h2>
-  <p>
-    テーマや指示を入力し、アンケートに答えて送信ボタンを押すだけで、AIが最適な提案を自動で表示します。<br>
-    以下のようにテーマやそれに沿った指示を考慮して、記入してください。<br>
-    コピーボタンをおすと、メインの項目にコピーされます。
-  </p>
-
-  <div class="sample-box">
-    <div class="sample-title">例1：ペット</div>
-    <div class="sample-row">
-      <span class="sample-label">テーマ</span>
-      <span id="sample-theme1">ペット</span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">テー別AI指示</span>
-      <span id="sample-instruction1">家で飼うペットについてです。家の種類は５種、ペットに臨むことは20種複数選択、好みについてテキストで入力可能で作成してください。</span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">回答送信時</span>
-      <span id="sample-sendInstruction1">不明、無理な場合はその理由を返してください。</span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">回答者へのアドバイス</span>
-      <span id="sample-advice1">わかることは詳しく、わからないことは無回答でおけ</span>
-    </div>
-    <button class="copy-btn" onclick="copySampleSet(1)">このサンプルを全コピー</button>
-  </div>
-
-  <div class="sample-box">
-    <div class="sample-title">例2：沖縄地方でのダイビングエリア</div>
-    <div class="sample-row">
-      <span class="sample-label">テーマ</span>
-      <span id="sample-theme2">沖縄地方でのダイビングエリア</span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">テー別AI指示</span>
-      <span id="sample-instruction2">沖縄地方にダイビングエリアについて、ダイバーの経験、楽しみ、見たいもの、シーズンを考慮して提案できるようにしてください。</span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">回答送信時</span>
-      <span id="sample-sendInstruction2"></span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">回答者へのアドバイス</span>
-      <span id="sample-advice2"></span>
-    </div>
-    <button class="copy-btn" onclick="copySampleSet(2)">このサンプルを全コピー</button>
-  </div>
-
-  <div class="sample-box">
-    <div class="sample-title">例3：今日のお昼</div>
-    <div class="sample-row">
-      <span class="sample-label">テーマ</span>
-      <span id="sample-theme3">今日のお昼</span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">テー別AI指示</span>
-      <span id="sample-instruction3">費用、誰と一緒か、場所、伴う目的などを考慮して提案してください。</span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">回答送信時</span>
-      <span id="sample-sendInstruction3"></span>
-    </div>
-    <div class="sample-row">
-      <span class="sample-label">回答者へのアドバイス</span>
-      <span id="sample-advice3"></span>
-    </div>
-    <button class="copy-btn" onclick="copySampleSet(3)">このサンプルを全コピー</button>
-  </div>
-
-  <div class="center">
-    <button class="close-btn" onclick="window.close()">閉じる</button>
-  </div>
-
-  <script>
-    function copySampleSet(num) {
-      const ids = [
-        { sample: `sample-theme${num}`, main: 'theme' },
-        { sample: `sample-instruction${num}`, main: 'instruction' },
-        { sample: `sample-sendInstruction${num}`, main: 'sendInstruction' },
-        { sample: `sample-advice${num}`, main: 'userAdvice' }
-      ];
-      if (window.opener && !window.opener.closed) {
-        try {
-          ids.forEach(pair => {
-            const value = document.getElementById(pair.sample).textContent;
-            const input = window.opener.document.getElementById(pair.main);
-            if (input) input.value = value;
-          });
-        } catch(e) {
-          alert('コピーに失敗しました');
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <title>使い方サンプル</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", "Meiryo", sans-serif;
+        padding: 24px;
+        background: #fafdff;
       }
-    }
-  </script>
-</body>
+      h2 {
+        color: #1976d2;
+      }
+      .sample-box {
+        background: #e3f2fd;
+        border-left: 4px solid #1976d2;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin: 18px 0;
+      }
+      .sample-title {
+        font-weight: bold;
+        color: #1976d2;
+        margin-top: 10px;
+      }
+      .sample-label {
+        color: #1565c0;
+        font-weight: bold;
+        margin-right: 4px;
+      }
+      .sample-row {
+        margin-bottom: 4px;
+      }
+      .copy-btn,
+      .close-btn {
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font-size: 0.95em;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .center {
+        text-align: center;
+        margin-top: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>簡単な使い方サンプル一覧</h2>
+      <div v-for="(s, i) in samples" :key="s.id" class="sample-box">
+        <div class="sample-title">例{{ i + 1 }}：{{ s.title }}</div>
+        <div class="sample-row">
+          <span class="sample-label">テーマ</span>{{ s.title }}
+        </div>
+        <div class="sample-row">
+          <span class="sample-label">質問作成時指示</span>{{ s.instruction }}
+        </div>
+        <div class="sample-row" v-if="s.sendInstruction">
+          <span class="sample-label">提案作成時指示</span>{{ s.sendInstruction
+          }}
+        </div>
+        <div class="sample-row" v-if="s.userAdvice">
+          <span class="sample-label">回答者へのアドバイス</span>{{ s.userAdvice
+          }}
+        </div>
+        <button class="copy-btn" @click="copySample(s)">
+          このサンプルをコピー
+        </button>
+      </div>
+      <div class="center">
+        <button class="close-btn" @click="closeWindow()">閉じる</button>
+      </div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            samples: [],
+          };
+        },
+        methods: {
+          async loadSamples() {
+            const res = await fetch("/static/data/sample.txt");
+            const text = await res.text();
+            this.samples = this.parseSamples(text);
+          },
+          closeWindow() {
+            window.close();
+          },
+          parseSamples(text) {
+            const lines = text.split(/\r?\n/);
+            const samples = [];
+            let currentId = null;
+            let buffer = [];
+
+            const flush = () => {
+              if (currentId && buffer.length >= 1) {
+                samples.push({
+                  id: currentId,
+                  title: buffer[0] || "",
+                  instruction: buffer[1] || "",
+                  sendInstruction: buffer[2] || "",
+                  userAdvice: buffer[3] || "",
+                });
+              }
+              currentId = null;
+              buffer = [];
+            };
+
+            for (const rawLine of lines) {
+              const line = rawLine.trim();
+              if (!line || line.startsWith("#")) continue;
+
+              if (line.startsWith("&")) {
+                flush();
+                currentId = line.slice(1).trim();
+              } else if (currentId && buffer.length < 4) {
+                buffer.push(line);
+              }
+            }
+            flush();
+            return samples;
+          },
+          copySample(s) {
+            if (window.opener && !window.opener.closed) {
+              try {
+                const fields = {
+                  theme: s.title,
+                  instruction: s.instruction,
+                  sendInstruction: s.sendInstruction,
+                  userAdvice: s.userAdvice,
+                };
+                for (const [key, val] of Object.entries(fields)) {
+                  const el = window.opener.document.getElementById(key);
+                  if (el) el.value = val;
+                }
+              } catch (e) {
+                alert("コピーに失敗しました");
+              }
+            }
+          },
+        },
+        mounted() {
+          this.loadSamples();
+        },
+      }).mount("#app");
+    </script>
+  </body>
 </html>

@@ -15,7 +15,7 @@ def get_prompt_r(title, answers):
             "role": "user",
             "content": f"""
 あなたは{title}に関するアドバイザー
-以下は{title}に関するアンケート結果です：
+以下は{title}に関する質問結果です：
 
 {json.dumps(answers, ensure_ascii=False, indent=2)}
 
@@ -33,7 +33,7 @@ def get_prompt_r(title, answers):
     "functions": [
         {
             "name": "get_result",
-            "description": f"{title}に関するアンケート結果から候補を生成します。",
+            "description": f"{title}に関する質問結果から候補を生成します。",
             "parameters": {
                 "type": "object",
                 "properties": {

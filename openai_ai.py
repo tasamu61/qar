@@ -1,5 +1,5 @@
 import google.generativeai as genai
-import json, os, requests
+import json, os, requests, logging
 
 
 def get_prompt_q(theme, instruction):
@@ -66,7 +66,7 @@ def get_prompt_q(theme, instruction):
 
 
 
-def get_prompt_r(title, answers):
+def get_prompt_r(title, answers, sendInstruction):
 
 # プロンプトの作成
     function_call_payload = {
@@ -76,23 +76,24 @@ def get_prompt_r(title, answers):
             "role": "user",
             "content": f"""
 あなたは{title}に関するアドバイザー
-以下は{title}に関するアンケート結果です：
+以下は{title}に関する質問結果です：
 {json.dumps(answers, ensure_ascii=False, indent=2)}
+{sendInstruction}
 この情報をもとに、以下の形式でおすすめの{title}を3つ提案してください。
 候補提示が無理なら、同じフォーマットでdescriptionにその理由を返してください。
-日程、予算が未入力なら、それについても案を提示してアドバイスもしてください。
 必ず
-かならず n["choices"][0]["message"]["function_call"]["arguments"]
+n["choices"][0]["message"]["function_call"]["arguments"]
 で当該jsonを取得できる電文にしてください。
 出力はJSON形式のみ。余計な解説文・前置き・マークダウンは含めないでください。
 返信は、コードはUTF-8でおねがいします。
+この要求は単独で他の要求とは関係ありません。
 """
         }
     ],
     "functions": [
         {
             "name": "get_result",
-            "description": f"{title}に関するアンケート結果から候補を生成します。",
+            "description": f"{title}に関する質問結果から候補を生成します。",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -132,7 +133,7 @@ def get_prompt_r(title, answers):
     }
 }
     
-    print(function_call_payload)
+    # print(function_call_payload)
 
     return function_call_payload
 
@@ -140,7 +141,8 @@ def get_prompt_r(title, answers):
 
 def get_result(function_call_payload):
     # APIキーを設定   
-    okey = os.getenv("OKEY") 
+    okey = os.getenv("OKEY")
+    logging.debug(f"P {function_call_payload}") 
     ai_response = requests.post(
         "https://api.openai.com/v1/chat/completions",
         headers={
@@ -150,7 +152,7 @@ def get_result(function_call_payload):
         json=function_call_payload,  # 事前に作成された Function Calling 用ペイロード
         timeout=10
     )
-    print(ai_response.text)
+    logging.debug(f"R {ai_response}")
 # レスポンスを JSON（辞書）として取得
     response_json = ai_response.json()
 

@@ -66,7 +66,7 @@ h2 {
   color: #555;
 }
 
-/* アンケートと結果見出しの上に線を引く */
+/* 質問と結果見出しの上に線を引く */
 .section-header {
   border-top: 2px solid #ccc;
   padding-top: 10px;
@@ -230,7 +230,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* アンケートや結果のブロック */
+/* 質問や結果のブロック */
 .section-header,
 .results-header h3 {
   color: #1976d2;

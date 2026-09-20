@@ -50,7 +50,7 @@ function displayQuestions(data) {
     // ヘッダを追加（線が上に来るように）
     const header = document.createElement("div");
     header.className = "section-header";
-    header.textContent = "アンケートに答えてください";
+    header.textContent = "質問に答えてください";
     area.appendChild(header);
 
     if (!data || !Array.isArray(data.questions)) {
@@ -262,7 +262,7 @@ function displayResultX(result) {
         resultDiv.innerHTML = ""; // 結果を消す
         document.getElementById("questionsArea").style.display = "block"; // 質問フォームを再表示
 
-        // アンケートタイトルまでスクロール
+        // 質問タイトルまでスクロール
         const questionsArea = document.getElementById("questionsArea");
         if (questionsArea) {
             questionsArea.scrollIntoView({ behavior: "smooth", block: "start" });
