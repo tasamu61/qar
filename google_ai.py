@@ -81,7 +81,8 @@ def get_result(prompt):
     # APIキーを設定   
     gkey = os.getenv("GKEY") 
     genai.configure(api_key= gkey)
-    model = genai.GenerativeModel("models/gemini-1.5-pro-latest")# モデルに問い合わせ
+    # エラーメッセージの指定に従って gemini-3.6-flash に変更
+    model = genai.GenerativeModel('gemini-3.6-flash')
     logging.debug(f"P {prompt}")
     response = model.generate_content(prompt)
     logging.debug(f"R {response}")

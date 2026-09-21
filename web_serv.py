@@ -39,9 +39,12 @@ def get_questions():
     if not req_json:
         return jsonify({"error": "JSONデータがありません。"}), 400
 
-    theme = req_json.get("theme", "")
-    instruction = req_json.get("instruction", "")
-    llm = req_json.get("aillm", "openai")
+    # answer オブジェクトがある場合はそこから取得し、なければ直下を見る（後方互換対応）
+    answer_data = req_json.get("answer", req_json)
+
+    theme = answer_data.get("theme", "")
+    instruction = answer_data.get("sendInstruction", answer_data.get("instruction", ""))
+    llm = answer_data.get("aillm", "openai")
 
     if llm == "self":
         json_str = json.dumps(response_json, ensure_ascii=False, indent=2)
