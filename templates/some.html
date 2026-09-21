@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>莉ｻ諢上ユ繝ｼ繝槭〒縺ｮAI謠先｡医ョ繝｢</title>
+  <title>任意テーマでのAI提案デモ</title>
   <link rel="icon" href="{{ url_for('static', filename='img/favicona.png') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ url_for('static', filename='some.css') }}?ver={{ time }}">
   <style>
     [v-cloak] {
       display: none;
     }
-    /* 譁ｰ隕剰ｿｽ蜉・壼・蜉帙お繝ｪ繧｢縺ｮ繧ｹ繧ｿ繧､繝ｫ */
+    /* 新規追加：入力エリアのスタイル */
     #extraInputs {
       margin-bottom: 20px;
       padding: 10px;
@@ -33,58 +33,58 @@
 
 <body>
   <div class="container">
-    <h1>縺ｪ繧薙〒繧・I謠先｡医ョ繝｢</h1>
+    <h1>なんでもAI提案デモ</h1>
 <p>
-  縺薙％縺ｧ縺ｯ莉ｻ諢上・繝・・繝槭↓縺､縺・※AI縺瑚ｳｪ蝠上ｒ逕滓・縺励※縲√◎繧後↓遲斐∴繧九→縺昴・繝・・繝槭〒縺ｮ譛驕ｩ縺ｪ繧ゅ・繧但I縺梧署譯医＠縺ｾ縺吶・
-  縲後ユ繝ｼ繝槭阪ｄ繝・・繝槭↓縺昴▲縺溘窟I縺ｸ縺ｮ謖・､ｺ莠矩・阪√悟屓遲秘∽ｿ｡譎ゅ↓AI縺ｸ縺ｮ謖・､ｺ莠矩・・
-  縺ゅｋ縺・・蝗樒ｭ碑・ｼ医≠縺ｪ縺滂ｼ滂ｼ峨∈縺ｮ繧｢繝峨ヰ繧､繧ｹ繧貞・蜉帙＠縺ｦ縺上□縺輔＞縲・br>
-  蝗樒ｭ碑・∈縺ｮ繧｢繝峨ヰ繧､繧ｹ縺ｯAI縺ｯ蜿ら・縺励∪縺帙ｓ縲・
-  <a href="#" id="usage-link">險ｭ螳壻ｾ九・縺薙■繧・/a>
-  雉ｪ蝠冗函謌舌√◎縺ｮ蝗樒ｭ泌・螳ｹ繧偵ｂ縺ｨ縺ｫ縺励◆謠先｡医・openai, google, groq.com
-  閾ｪ蝟ｶ縺ｮAI縺ｮ縺・★繧後°繧帝∈謚槭〒縺阪∪縺吶′縲∬・蝟ｶ縺ｯ莉翫・縺ｨ縺薙ｍ縺ｻ縺ｨ繧薙←讖溯・縺励※縺ｾ縺帙ｓ<br>
+  ここでは任意のテーマについてAIが質問を生成して、それに答えるとそのテーマでの最適なものをAIが提案します。
+  「テーマ」やテーマにそった「AIへの指示事項」、「回答送信時にAIへの指示事項」,
+  あるいは回答者（あなた？）へのアドバイスを入力してください。<br>
+  回答者へのアドバイスはAIは参照しません。
+  <a href="#" id="usage-link">設定例はこちら</a>
+  質問生成、その回答内容をもとにした提案はopenai, google, groq.com
+  自営のAIのいずれかを選択できますが、自営は今のところほとんど機能してません<br>
 </p>
 
-    <!-- 譁ｰ隕剰ｿｽ蜉・壼｢励∴縺滄・岼縺ｮ蜈･蜉帙お繝ｪ繧｢ -->
+    <!-- 新規追加：増えた項目の入力エリア -->
     <div id="extraInputs">
       <div>
-        <label for="theme">繝・・繝・(20譁・ｭ嶺ｻ･蜀・:</label>
-        <input type="text" id="theme" maxlength="20" placeholder="萓具ｼ壽羅陦悟・">
+        <label for="theme">テーマ (20文字以内):</label>
+        <input type="text" id="theme" maxlength="20" placeholder="例：旅行先">
       </div>
       <div>
-        <label for="instruction">AI縺ｸ縺ｮ繝・・繝槫挨縺ｮ雉ｪ蝠丈ｽ懈・謖・､ｺ (200譁・ｭ嶺ｻ･蜀・:</label>
-        <textarea id="instruction" rows="3" maxlength="200" placeholder="萓具ｼ壹主・逋ｺ蝣ｴ謇縲上・隱槫・蜉帙√取律遞九上朱≡鬘阪上・蜊倬∈謚・></textarea>
+        <label for="instruction">AIへのテーマ別の質問作成指示 (200文字以内):</label>
+        <textarea id="instruction" rows="3" maxlength="200" placeholder="例：『出発場所』は語入力、『日程』『金額』は単選択"></textarea>
       </div>
       <div>
-        <label for="sendInstruction">AI縺ｸ縺ｮ謠先｡井ｽ懈・譎ゅ・謖・､ｺ (200譁・ｭ嶺ｻ･蜀・:</label>
-        <textarea id="sendInstruction" rows="3" maxlength="200" placeholder="萓具ｼ夂ｩｺ谺・↑繧我ｸ闊ｬ逧・↑螯･蠖薙↑蜀・ｮｹ繧・></textarea>
+        <label for="sendInstruction">AIへの提案作成時の指示 (200文字以内):</label>
+        <textarea id="sendInstruction" rows="3" maxlength="200" placeholder="例：空欄なら一般的な妥当な内容を"></textarea>
       </div>
       <div>
-        <label for="userAdvice">蝗樒ｭ碑・∈縺ｮ繧｢繝峨ヰ繧､繧ｹ (200譁・ｭ嶺ｻ･蜀・:</label>
-        <textarea id="userAdvice" rows="3" maxlength="200" placeholder="萓具ｼ壹ｏ縺九ｉ縺ｪ縺・ｴ蜷医・遨ｺ谺・〒OK"></textarea>
+        <label for="userAdvice">回答者へのアドバイス (200文字以内):</label>
+        <textarea id="userAdvice" rows="3" maxlength="200" placeholder="例：わからない場合は空欄でOK"></textarea>
       </div>
     </div>
 
-    <!-- ...譌｢蟄倥・繧ｳ繝ｼ繝・.. -->
-<button id="button-openai">雉ｪ蝠城幕蟋・openai)</button>
-<button id="button-google">雉ｪ蝠城幕蟋・google)</button>
-<button id="button-groq">雉ｪ蝠城幕蟋・groq.com)</button>
-<button id="button-self">雉ｪ蝠城幕蟋・self)</button>
-<!-- ...譌｢蟄倥・繧ｳ繝ｼ繝・.. -->
+    <!-- ...既存のコード... -->
+<button id="button-openai">質問開始(openai)</button>
+<button id="button-google">質問開始(google)</button>
+<button id="button-groq">質問開始(groq.com)</button>
+<button id="button-self">質問開始(self)</button>
+<!-- ...既存のコード... -->
 
     <form id="questionsArea">
       <input type="hidden" value="some" id="title">
 
-      <!-- Vue縺梧緒逕ｻ縺吶ｋ鬆伜沺 -->
+      <!-- Vueが描画する領域 -->
       <div id="vue-question-area" v-cloak>
         {% raw %}
         <div v-if="questions.length">
-          <div class="section-header">雉ｪ蝠上↓遲斐∴縺ｦ縺上□縺輔＞</div>
+          <div class="section-header">質問に答えてください</div>
 
           <div v-for="q in questions" :key="q.id" class="question-block">
             <p>{{ q.text }}</p>
 
             <select v-if="q.type === 'single'" :name="'q' + q.id" v-model="formValues['q' + q.id]">
-              <option value="">驕ｸ謚槭＠縺ｦ縺上□縺輔＞</option>
+              <option value="">選択してください</option>
               <option v-for="choice in q.choices" :value="choice">{{ choice }}</option>
             </select>
 
@@ -96,38 +96,38 @@
             </div>
 
             <input v-if="q.type === 'text'" type="text" :name="'q' + q.id" v-model="formValues['q' + q.id]" />
-            <textarea v-if="q.type === 'text1'" :name="'q' + q.id" rows="4" cols="50" placeholder="縺薙％縺ｫ蜈･蜉帙＠縺ｦ縺上□縺輔＞"
+            <textarea v-if="q.type === 'text1'" :name="'q' + q.id" rows="4" cols="50" placeholder="ここに入力してください"
               v-model="formValues['q' + q.id]"></textarea>
           </div>
 
-          <!-- 騾∽ｿ｡繝懊ち繝ｳ -->
+          <!-- 送信ボタン -->
           <div style="margin-top: 20px; display: flex; gap: 12px;">
             <button v-for="name in ['openai', 'google','groq', 'self']" :key="name" type="button"
               :disabled="sending" @click="getResult(name)">
-              騾∽ｿ｡({{ name }})
+              送信({{ name }})
             </button>
           </div>
         </div>
 
-        <!-- 邨先棡陦ｨ遉ｺ繧ｨ繝ｪ繧｢ -->
+        <!-- 結果表示エリア -->
         <div v-if="result.length" class="results" style="margin-top: 30px;">
           <div class="results-header">
-            <h3>縺翫☆縺吶ａ縺ｮ謠先｡・/h3>
+            <h3>おすすめの提案</h3>
           </div>
           <ul>
             <li v-for="rec in result" :key="rec.destination" class="result-item">
-              <strong>{{ rec.destination }}・医せ繧ｳ繧｢: {{ rec.score }}・・/strong>
+              <strong>{{ rec.destination }}（スコア: {{ rec.score }}）</strong>
               <p>{{ rec.description }}</p>
               <a :href="rec.url" target="_blank">{{ rec.url }}</a>
               <a :href="rec.googleSearchUrl" target="_blank" style="display: block; margin-top: 0.2em;">
-                {{ rec.destination }} 繧偵％縺ｮ譚｡莉ｶ縺ｧGoogle讀懃ｴ｢
+                {{ rec.destination }} をこの条件でGoogle検索
               </a>
             </li>
           </ul>
           <button type="button" id="retry-button" style="font-weight: bold; margin-top: 16px; margin-right: 16px;" @click="scrollToTop">
-            蜀榊ｺｦ蝗樒ｭ斐☆繧・
+            再度回答する
           </button>
-          <button type="button" class="btn" onclick="scrollToThemeInput()">繝・・繝槫・蜉帙°繧牙・蠎ｦ</button>
+          <button type="button" class="btn" onclick="scrollToThemeInput()">テーマ入力から再度</button>
         
         </div>
 
@@ -143,7 +143,7 @@
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
 
-            // 莉｣蜈･縺吶ｋ隕∫ｴ縺ｮID縺ｨURL繝代Λ繝｡繝ｼ繧ｿ縺ｮ繧ｭ繝ｼ蜷阪ｒ螳夂ｾｩ
+            // 代入する要素のIDとURLパラメータのキー名を定義
             const paramMap = {
                 'theme': 'theme',
                 'instruction': 'instruction',
@@ -151,7 +151,7 @@
                 'userAdvice': 'userAdvice'
             };
 
-            // 蜷ИD縺ｫ蟇ｾ蠢懊☆繧喫nput隕∫ｴ縺ｫ蛟､繧剃ｻ｣蜈･
+            // 各IDに対応するinput要素に値を代入
             for (const id in paramMap) {
                 const paramName = paramMap[id];
                 const value = urlParams.get(paramName);
@@ -171,19 +171,19 @@
     });
   }
   function scrollToThemeInput() {
-    // 雉ｪ蝠城幕蟋九・繧ｿ繝ｳ繧弾nable
+    // 質問開始ボタンをenable
     setStartButtonsDisabled(false);
-    // 繝・・繝槫・蜉帶ｬ・・ID縺・theme"縺ｮ蝣ｴ蜷・
+    // テーマ入力欄のIDが"theme"の場合
     const themeInput = document.getElementById('extraInputs');
     if (themeInput) {
       themeInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
       themeInput.focus();
     } else {
-      // 縺ｪ縺代ｌ縺ｰ繝壹・繧ｸ繝医ャ繝励∈
+      // なければページトップへ
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
-  // 3縺､縺ｮ繝懊ち繝ｳ繧偵∪縺ｨ繧√※disable縺吶ｋ髢｢謨ｰ
+  // 3つのボタンをまとめてdisableする関数
   function setStartButtonsDisabled(disabled) {
     ['button-openai', 'button-google','button-groq', 'button-self'].forEach(id => {
       const btn = document.getElementById(id);
@@ -191,7 +191,7 @@
     });
   }
 
-  // 蜷・・繧ｿ繝ｳ縺ｮ繧ｯ繝ｪ繝・け譎ゅ↓蜈ｨ縺ｦdisable
+  // 各ボタンのクリック時に全てdisable
   ['button-openai', 'button-google', 'button-groq', 'button-self'].forEach(id => {
     const btn = document.getElementById(id);
     if (btn) {

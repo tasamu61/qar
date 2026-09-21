@@ -125,4 +125,4 @@ def add_image_to_html(response: Response) -> Response:
     return response
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True, use_reloader=False)

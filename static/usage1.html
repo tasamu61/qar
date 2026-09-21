@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
     <link rel="icon" href="/static/img/favicone.png" type="image/x-icon">
-  <title>邁｡蜊倥↑菴ｿ縺・婿</title>
+  <title>簡単な使い方</title>
   <style>
     body { font-family: 'Segoe UI', 'Meiryo', sans-serif; padding: 24px; background: #fafdff; }
     h2 { color: #1976d2; }
@@ -49,78 +49,78 @@
   </style>
 </head>
 <body>
-  <h2>邁｡蜊倥↑菴ｿ縺・婿</h2>
+  <h2>簡単な使い方</h2>
   <p>
-    繝・・繝槭ｄ謖・､ｺ繧貞・蜉帙＠縲∬ｳｪ蝠上↓遲斐∴縺ｦ騾∽ｿ｡繝懊ち繝ｳ繧呈款縺吶□縺代〒縲、I縺梧怙驕ｩ縺ｪ謠先｡医ｒ閾ｪ蜍輔〒陦ｨ遉ｺ縺励∪縺吶・br>
-    莉･荳九・繧医≧縺ｫ繝・・繝槭ｄ縺昴ｌ縺ｫ豐ｿ縺｣縺滓欠遉ｺ繧定・・縺励※縲∬ｨ伜・縺励※縺上□縺輔＞縲・br>
-    繧ｳ繝斐・繝懊ち繝ｳ繧偵♀縺吶→縲√Γ繧､繝ｳ縺ｮ鬆・岼縺ｫ繧ｳ繝斐・縺輔ｌ縺ｾ縺吶・
+    テーマや指示を入力し、質問に答えて送信ボタンを押すだけで、AIが最適な提案を自動で表示します。<br>
+    以下のようにテーマやそれに沿った指示を考慮して、記入してください。<br>
+    コピーボタンをおすと、メインの項目にコピーされます。
   </p>
 
   <div class="sample-box">
-    <div class="sample-title">萓・・壹・繝・ヨ</div>
+    <div class="sample-title">例1：ペット</div>
     <div class="sample-row">
-      <span class="sample-label">繝・・繝・/span>
-      <span id="sample-theme1">繝壹ャ繝・/span>
+      <span class="sample-label">テーマ</span>
+      <span id="sample-theme1">ペット</span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">繝・・蛻･AI謖・､ｺ</span>
-      <span id="sample-instruction1">螳ｶ縺ｧ鬟ｼ縺・・繝・ヨ縺ｫ縺､縺・※縺ｧ縺吶ょｮｶ縺ｮ遞ｮ鬘槭・・慕ｨｮ縲√・繝・ヨ縺ｫ閾ｨ繧縺薙→縺ｯ20遞ｮ隍・焚驕ｸ謚槭∝･ｽ縺ｿ縺ｫ縺､縺・※繝・く繧ｹ繝医〒蜈･蜉帛庄閭ｽ縺ｧ菴懈・縺励※縺上□縺輔＞縲・/span>
+      <span class="sample-label">テー別AI指示</span>
+      <span id="sample-instruction1">家で飼うペットについてです。家の種類は５種、ペットに臨むことは20種複数選択、好みについてテキストで入力可能で作成してください。</span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">蝗樒ｭ秘∽ｿ｡譎・/span>
-      <span id="sample-sendInstruction1">荳肴・縲∫┌逅・↑蝣ｴ蜷医・縺昴・逅・罰繧定ｿ斐＠縺ｦ縺上□縺輔＞縲・/span>
+      <span class="sample-label">回答送信時</span>
+      <span id="sample-sendInstruction1">不明、無理な場合はその理由を返してください。</span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">蝗樒ｭ碑・∈縺ｮ繧｢繝峨ヰ繧､繧ｹ</span>
-      <span id="sample-advice1">繧上°繧九％縺ｨ縺ｯ隧ｳ縺励￥縲√ｏ縺九ｉ縺ｪ縺・％縺ｨ縺ｯ辟｡蝗樒ｭ斐〒縺翫￠</span>
+      <span class="sample-label">回答者へのアドバイス</span>
+      <span id="sample-advice1">わかることは詳しく、わからないことは無回答でおけ</span>
     </div>
-    <button class="copy-btn" onclick="copySampleSet(1)">縺薙・繧ｵ繝ｳ繝励Ν繧偵さ繝斐・</button>
+    <button class="copy-btn" onclick="copySampleSet(1)">このサンプルをコピー</button>
   </div>
 
   <div class="sample-box">
-    <div class="sample-title">萓・・壽ｲ也ｸ・慍譁ｹ縺ｧ縺ｮ繝繧､繝薙Φ繧ｰ繧ｨ繝ｪ繧｢</div>
+    <div class="sample-title">例2：沖縄地方でのダイビングエリア</div>
     <div class="sample-row">
-      <span class="sample-label">繝・・繝・/span>
-      <span id="sample-theme2">豐也ｸ・慍譁ｹ縺ｧ縺ｮ繝繧､繝薙Φ繧ｰ繧ｨ繝ｪ繧｢</span>
+      <span class="sample-label">テーマ</span>
+      <span id="sample-theme2">沖縄地方でのダイビングエリア</span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">繝・・蛻･AI謖・､ｺ</span>
-      <span id="sample-instruction2">豐也ｸ・慍譁ｹ縺ｫ繝繧､繝薙Φ繧ｰ繧ｨ繝ｪ繧｢縺ｫ縺､縺・※縲√ム繧､繝舌・縺ｮ邨碁ｨ薙∵･ｽ縺励∩縲∬ｦ九◆縺・ｂ縺ｮ縲√す繝ｼ繧ｺ繝ｳ繧定・・縺励※謠先｡医〒縺阪ｋ繧医≧縺ｫ縺励※縺上□縺輔＞縲・/span>
+      <span class="sample-label">テー別AI指示</span>
+      <span id="sample-instruction2">沖縄地方にダイビングエリアについて、ダイバーの経験、楽しみ、見たいもの、シーズンを考慮して提案できるようにしてください。</span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">蝗樒ｭ秘∽ｿ｡譎・/span>
+      <span class="sample-label">回答送信時</span>
       <span id="sample-sendInstruction2"></span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">蝗樒ｭ碑・∈縺ｮ繧｢繝峨ヰ繧､繧ｹ</span>
+      <span class="sample-label">回答者へのアドバイス</span>
       <span id="sample-advice2"></span>
     </div>
-    <button class="copy-btn" onclick="copySampleSet(2)">縺薙・繧ｵ繝ｳ繝励Ν繧偵さ繝斐・</button>
+    <button class="copy-btn" onclick="copySampleSet(2)">このサンプルをコピー</button>
   </div>
 
   <div class="sample-box">
-    <div class="sample-title">萓・・壻ｻ頑律縺ｮ縺頑仂</div>
+    <div class="sample-title">例3：今日のお昼</div>
     <div class="sample-row">
-      <span class="sample-label">繝・・繝・/span>
-      <span id="sample-theme3">莉頑律縺ｮ縺頑仂</span>
+      <span class="sample-label">テーマ</span>
+      <span id="sample-theme3">今日のお昼</span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">繝・・蛻･AI謖・､ｺ</span>
-      <span id="sample-instruction3">雋ｻ逕ｨ縲∬ｪｰ縺ｨ荳邱偵°縲∝ｴ謇縲∽ｼｴ縺・岼逧・↑縺ｩ繧定・・縺励※謠先｡医＠縺ｦ縺上□縺輔＞縲・/span>
+      <span class="sample-label">テー別AI指示</span>
+      <span id="sample-instruction3">費用、誰と一緒か、場所、伴う目的などを考慮して提案してください。</span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">蝗樒ｭ秘∽ｿ｡譎・/span>
+      <span class="sample-label">回答送信時</span>
       <span id="sample-sendInstruction3"></span>
     </div>
     <div class="sample-row">
-      <span class="sample-label">蝗樒ｭ碑・∈縺ｮ繧｢繝峨ヰ繧､繧ｹ</span>
+      <span class="sample-label">回答者へのアドバイス</span>
       <span id="sample-advice3"></span>
     </div>
-    <button class="copy-btn" onclick="copySampleSet(3)">縺薙・繧ｵ繝ｳ繝励Ν繧偵さ繝斐・</button>
+    <button class="copy-btn" onclick="copySampleSet(3)">このサンプルをコピー</button>
   </div>
 
   <div class="center">
-    <button class="close-btn" onclick="window.close()">髢峨§繧・/button>
+    <button class="close-btn" onclick="window.close()">閉じる</button>
   </div>
 
   <script>
@@ -139,7 +139,7 @@
             if (input) input.value = value;
           });
         } catch(e) {
-          alert('繧ｳ繝斐・縺ｫ螟ｱ謨励＠縺ｾ縺励◆');
+          alert('コピーに失敗しました');
         }
       }
     }

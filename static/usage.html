@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>菴ｿ縺・婿繧ｵ繝ｳ繝励Ν</title>
+    <title>使い方サンプル</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
     <style>
       body {
@@ -52,29 +52,29 @@
   </head>
   <body>
     <div id="app">
-      <h2>邁｡蜊倥↑菴ｿ縺・婿繧ｵ繝ｳ繝励Ν荳隕ｧ</h2>
+      <h2>簡単な使い方サンプル一覧</h2>
       <div v-for="(s, i) in samples" :key="s.id" class="sample-box">
-        <div class="sample-title">萓宮{ i + 1 }}・嘴{ s.title }}</div>
+        <div class="sample-title">例{{ i + 1 }}：{{ s.title }}</div>
         <div class="sample-row">
-          <span class="sample-label">繝・・繝・/span>{{ s.title }}
+          <span class="sample-label">テーマ</span>{{ s.title }}
         </div>
         <div class="sample-row">
-          <span class="sample-label">雉ｪ蝠丈ｽ懈・譎よ欠遉ｺ</span>{{ s.instruction }}
+          <span class="sample-label">質問作成時指示</span>{{ s.instruction }}
         </div>
         <div class="sample-row" v-if="s.sendInstruction">
-          <span class="sample-label">謠先｡井ｽ懈・譎よ欠遉ｺ</span>{{ s.sendInstruction
+          <span class="sample-label">提案作成時指示</span>{{ s.sendInstruction
           }}
         </div>
         <div class="sample-row" v-if="s.userAdvice">
-          <span class="sample-label">蝗樒ｭ碑・∈縺ｮ繧｢繝峨ヰ繧､繧ｹ</span>{{ s.userAdvice
+          <span class="sample-label">回答者へのアドバイス</span>{{ s.userAdvice
           }}
         </div>
         <button class="copy-btn" @click="copySample(s)">
-          縺薙・繧ｵ繝ｳ繝励Ν繧偵さ繝斐・
+          このサンプルをコピー
         </button>
       </div>
       <div class="center">
-        <button class="close-btn" @click="closeWindow()">髢峨§繧・/button>
+        <button class="close-btn" @click="closeWindow()">閉じる</button>
       </div>
     </div>
 
@@ -144,7 +144,7 @@
                   if (el) el.value = val;
                 }
               } catch (e) {
-                alert("繧ｳ繝斐・縺ｫ螟ｱ謨励＠縺ｾ縺励◆");
+                alert("コピーに失敗しました");
               }
             }
           },
