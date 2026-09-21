@@ -1,117 +1,117 @@
 <HTML>
 <HEAD>
   <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0J Win">
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=Shift_JIS">
-  <TITLE>�R�|�U�@��O</TITLE>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=UTF-8">
+  <TITLE>３－６　例外</TITLE>
 </HEAD>
 <BODY BGCOLOR="#ffffff">
 
-<P><A HREF="d_cgi.html">prev</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A HREF="inf.html">head</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A
-HREF="env.html">next</A><B><FONT SIZE="+1" FACE="�l�r ����"><BR>
+<P><A HREF="d_cgi.html">prev</A>　　　　　　　　　　　　　　　　　　　<A HREF="inf.html">head</A>　　　　　　　　　　　　　　　　　　　　　　　　　　<A
+HREF="env.html">next</A><B><FONT SIZE="+1" FACE="ＭＳ 明朝"><BR>
 <BR>
-�R�|�U�@��O<BR>
-</FONT></B><FONT FACE="�l�r ����"><BR>
+３－６　例外<BR>
+</FONT></B><FONT FACE="ＭＳ 明朝"><BR>
 <BR>
 <BR>
 <BR>
-�@�{�V�X�e���ł͈ȉ��̗�O�N���X���g�p���܂��B<BR>
+　本システムでは以下の例外クラスを使用します。<BR>
 <BR>
-<B>�R�|�U�|�P�@class UExcep</B><BR>
+<B>３－６－１　class UExcep</B><BR>
 <BR>
-�@�@class UExcep extends RuntimeException</FONT></P>
+　　class UExcep extends RuntimeException</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@�@�v���p�e�B<BR>
-�@�@int errno;<BR>
-�@�@int adderr;<BR>
-�@�@String errmsg;<BR>
-�@�@String addmsg;<BR>
+<P><FONT FACE="ＭＳ 明朝">　　プロパティ<BR>
+　　int errno;<BR>
+　　int adderr;<BR>
+　　String errmsg;<BR>
+　　String addmsg;<BR>
 <BR>
-�@�i�������@�u�l���X���[���ꂽ��O�́A�ߑ����ꂱ�̗�O���V���ɃX���[����<BR>
-�܂��B�܂��A�i�������@�u�l�ŗ�O�ƂȂ炸�A�v���O������ɂ��`�F�b�N�œd��<BR>
-�ُ�E���̓~�X�Ȃǂ����������ꍇ���A���̗�O���X���[���܂��B<BR>
-�@�G���[�̎�ʁi���L��errno�j�ɏ]���e���\�b�h�œK�؂ȃG���[�����������ȂȂ�<BR>
-�܂��B<BR>
+　Ｊａｖａ　ＶＭよりスローされた例外は、捕捉されこの例外が新たにスローされ<BR>
+ます。また、Ｊａｖａ　ＶＭで例外とならず、プログラム上によるチェックで電文<BR>
+異常・入力ミスなどが見つかった場合も、この例外をスローします。<BR>
+　エラーの種別（下記のerrno）に従い各メソッドで適切なエラー処理をおこなない<BR>
+ます。<BR>
 <BR>
-<B>�R�|�U�|�Q�@��O��ʁE�����<BR>
+<B>３－６－２　例外種別・処理基準<BR>
 </B><BR>
-�@��O�͔ԍ��ɂ�蕪�ނ���܂��B<BR>
-�@�������̏�����͈ȉ��̂Ƃ���ł��B<BR>
+　例外は番号により分類されます。<BR>
+　発生時の処理基準は以下のとおりです。<BR>
 </FONT></P>
 
-<P><B><FONT FACE="�l�r ����">�R�|�U�|�Q�|�P�@�V�X�e�������ŉ񕜉\�ȗ�O</FONT></B><FONT
- FACE="�l�r ����"><BR>
-�@errno�@200-299</FONT></P>
+<P><B><FONT FACE="ＭＳ 明朝">３－６－２－１　システム内部で回復可能な例外</FONT></B><FONT
+ FACE="ＭＳ 明朝"><BR>
+　errno　200-299</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@�N���C�A���g�T�C�h�̓��͌��<BR>
-�@�@class MissExcep extends RuntimeException<BR>
-�@�@�v���p�e�B�l<BR>
-�@�@errno 210-219<BR>
-�@�@errmsg �ʂ̌��C�����i���b�Z�[�W<BR>
-�@<BR>
-�@�@errmsg�̓��e��\�����A����҂ɍē��͂𑣂��B</FONT></P>
+<P><FONT FACE="ＭＳ 明朝">　クライアントサイドの入力誤り<BR>
+　　class MissExcep extends RuntimeException<BR>
+　　プロパティ値<BR>
+　　errno 210-219<BR>
+　　errmsg 個別の誤り修正促進メッセージ<BR>
+　<BR>
+　　errmsgの内容を表示し、操作者に再入力を促す。</FONT></P>
 
-<P><B><FONT FACE="�l�r ����">�R�|�U�|�Q�|�Q�@�V�X�e�������ŉ񕜕s�\�ȗ�O</FONT></B><FONT
- FACE="�l�r ����"><BR>
-�@errno 300�ȏ�</FONT></P>
+<P><B><FONT FACE="ＭＳ 明朝">３－６－２－２　システム内部で回復不可能な例外</FONT></B><FONT
+ FACE="ＭＳ 明朝"><BR>
+　errno 300以上</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@java.lang.Exception �iRuntimeException�ȊO�j<BR>
-�@�@errno=300-399</FONT></P>
+<P><FONT FACE="ＭＳ 明朝">　java.lang.Exception （RuntimeException以外）<BR>
+　　errno=300-399</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@java.lang.Exception.RuntimeException�@�iUExcep�ȊO�j<BR>
-�@�@errno=400-499</FONT></P>
+<P><FONT FACE="ＭＳ 明朝">　java.lang.Exception.RuntimeException　（UExcep以外）<BR>
+　　errno=400-499</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@�G���[�������b�Z�[�W��\�����A����҂ɏ����̑ł��؂�A�G���[�񍐂𑣂��B</FONT></P>
+<P><FONT FACE="ＭＳ 明朝">　エラー発生メッセージを表示し、操作者に処理の打ち切り、エラー報告を促す。</FONT></P>
 
-<P><B><FONT FACE="�l�r ����">�R�|�U�|�Q�|�Q�|�P�@�T�[�o�������ɂ������O</FONT></B><FONT
- FACE="�l�r ����"><BR>
-�@�@�@class SrvExcep extends RuntimeException<BR>
-�@�@�@errno 700-799</FONT></P>
+<P><B><FONT FACE="ＭＳ 明朝">３－６－２－２－１　サーバ側処理における例外</FONT></B><FONT
+ FACE="ＭＳ 明朝"><BR>
+　　　class SrvExcep extends RuntimeException<BR>
+　　　errno 700-799</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@�@�@�d���s���i�T�[�o���Ŕ����j<BR>
-�@�@�@�@errno=720-729<BR>
-�@�@�@���ϐ��ُ�<BR>
-�@�@�@�@errno=740-749<BR>
-�@�@�@SID���s��<BR>
-�@�@�@�@errno=761<BR>
-�@�@�@�c�a�A�N�Z�X���G���[�����i�t���R�[�h����j<BR>
-�@�@�@�@errno=780-789</FONT></P>
+<P><FONT FACE="ＭＳ 明朝">　　　電文不正（サーバ側で発生）<BR>
+　　　　errno=720-729<BR>
+　　　環境変数異常<BR>
+　　　　errno=740-749<BR>
+　　　SIDが不正<BR>
+　　　　errno=761<BR>
+　　　ＤＢアクセス時エラー発生（付加コードあり）<BR>
+　　　　errno=780-789</FONT></P>
 
-<P><B><FONT FACE="�l�r ����">�@�@���[�J���ȏ����ł̗�O</FONT></B><FONT FACE="�l�r ����"><BR>
+<P><B><FONT FACE="ＭＳ 明朝">　　ローカルな処理での例外</FONT></B><FONT FACE="ＭＳ 明朝"><BR>
 800-899<BR>
-�@�@�@class CliExcep extends RuntimeException<BR>
-�@�@�@�d���s���i�N���C�A���g���Ŕ����j<BR>
-�@�@�@�@errno=820-840</FONT></P>
+　　　class CliExcep extends RuntimeException<BR>
+　　　電文不正（クライアント側で発生）<BR>
+　　　　errno=820-840</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@java.lang.Error �̔���<BR>
-�@�@errno 920<BR>
-�@�@�֋X��G���[�ԍ������蓖�ĂĂ��邾���ŁA�ߑ��Ȃǂ̏����͂����Ȃ��܂�<BR>
-�@�@��B</FONT></P>
+<P><FONT FACE="ＭＳ 明朝">　java.lang.Error の発生<BR>
+　　errno 920<BR>
+　　便宜上エラー番号を割り当てているだけで、捕捉などの処理はおこないませ<BR>
+　　ん。</FONT></P>
 
-<P><FONT FACE="�l�r ����">�@�@+-Throwable<BR>
-�@�@�@|<BR>
-�@�@�@+-Exception<BR>
-�@�@�@|�@|<BR>
-�@�@�@|�@+-MissExcep 210-219�@���̓~�X�A�ē��͑��i���Ď��s<BR>
-�@�@�@|�@| ^^^^^^^^^<BR>
-�@�@�@|�@+-MissExcep,RuntimeException�ȊO 300-399<BR>
-�@�@�@|�@|<BR>
-�@�@�@|�@+-RuntimeException 400-899<BR>
-�@�@�@|�@�@ |<BR>
-|�@�@ + UExcpe�ȊO 400-499�iJava�Œ�`����Ă���j��O�@�v���I�o�O<BR>
-�@�@�@|�@�@ | <BR>
-�@�@�@|�@�@ +-UExcep ���[�U��`��O<BR>
-�@�@�@|�@�@ ^|^^^^<BR>
-�@�@�@|�@�@ �@+-SrvExcep 700-799 �T�[�o�T�C�h��O<BR>
-�@�@�@|�@�@ �@| ^^^^^^^^ �@720-729 �d���s��<BR>
-�@�@�@|�@�@ �@|�@�@�@�@�@�@740-749 ���ϐ��ُ�<BR>
-�@�@�@|�@�@ �@|�@�@�@�@�@�@761�@�@ SID�s��<BR>
-�@�@�@|�@�@ �@|�@�@�@�@�@�@780-789 �d���s��<BR>
-�@�@�@|�@�@ �@|<BR>
-�@�@�@|�@�@ �@+-CliExcep 800-899 �N���C�A���g�T�C�h��O<BR>
-�@�@�@|�@�@ ^^^^^^^^<BR>
-�@�@�@+-Error�@&gt;900 ���s�s�A�v���I<BR>
+<P><FONT FACE="ＭＳ 明朝">　　+-Throwable<BR>
+　　　|<BR>
+　　　+-Exception<BR>
+　　　|　|<BR>
+　　　|　+-MissExcep 210-219　入力ミス、再入力促進し再実行<BR>
+　　　|　| ^^^^^^^^^<BR>
+　　　|　+-MissExcep,RuntimeException以外 300-399<BR>
+　　　|　|<BR>
+　　　|　+-RuntimeException 400-899<BR>
+　　　|　　 |<BR>
+|　　 + UExcpe以外 400-499（Javaで定義されている）例外　致命的バグ<BR>
+　　　|　　 | <BR>
+　　　|　　 +-UExcep ユーザ定義例外<BR>
+　　　|　　 ^|^^^^<BR>
+　　　|　　 　+-SrvExcep 700-799 サーバサイド例外<BR>
+　　　|　　 　| ^^^^^^^^ 　720-729 電文不正<BR>
+　　　|　　 　|　　　　　　740-749 環境変数異常<BR>
+　　　|　　 　|　　　　　　761　　 SID不正<BR>
+　　　|　　 　|　　　　　　780-789 電文不正<BR>
+　　　|　　 　|<BR>
+　　　|　　 　+-CliExcep 800-899 クライアントサイド例外<BR>
+　　　|　　 ^^^^^^^^<BR>
+　　　+-Error　&gt;900 実行不可、致命的<BR>
 <BR>
-</FONT><A HREF="d_cgi.html">prev</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A HREF="inf.html">head</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A
+</FONT><A HREF="d_cgi.html">prev</A>　　　　　　　　　　　　　　　　　　　<A HREF="inf.html">head</A>　　　　　　　　　　　　　　　　　　　　　　　　　　<A
 HREF="env.html">next</A>
 
 </BODY>

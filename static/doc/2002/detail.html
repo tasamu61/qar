@@ -1,46 +1,46 @@
 <HTML>
 <HEAD>
   <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0J Win">
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=Shift_JIS">
-  <TITLE>�R�D�ڍא݌v</TITLE>
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=UTF-8">
+  <TITLE>３．詳細設計</TITLE>
 </HEAD>
 <BODY BGCOLOR="#ffffff">
 
-<A HREF="envtool.html">prev</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A HREF="inf.html">head</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A
+<A HREF="envtool.html">prev</A>　　　　　　　　　　　　　　　　　　　<A HREF="inf.html">head</A>　　　　　　　　　　　　　　　　　　　　　　　　　　　<A
 HREF="d_data.html">next</A><BR>
 <BR>
-<A NAME="s3"></A><B><FONT SIZE="+1" FACE="�l�r ����">�R�D�ڍא݌v<BR>
-</FONT></B><FONT FACE="�l�r ����">�@<BR>
-�@�P�`�Q�ő�܂��Ȏd�|����������܂������A�����ł̓V�X�e���������ڍׂȎd�l<BR>
-�ɂ��Đ������܂��B<BR>
-�@�ŏ��ɍ\�z�������_�̎������x�[�X�ɂ��Ă��܂��̂ŁA�ׂ��������ł͍��̃V�X<BR>
-�e���ƈقȂ镔��������܂����A������ς��Ƃ������܂��̂ŁA���n�_�ւ̔ł�<BR>
-�C���͂����Ȃ��Ă��܂���B<BR>
-�@���̎����ŃV�X�e�����̃|�C���g�ɂ��Ă͏\���������Ă�����Ƃ�������<BR>
-���B<BR>
-�@���������̐����̓R���s���[�^�V�X�e���̊J���o�������邱�Ƃ�O��ɏ�����<BR>
-���܂��B<BR>
-�@�܂��֘A������E�c�[���̎g�p�o�����Ȃ��Ƃ킩��Ȃ��\�������邩�������<BR>
-����B<BR>
+<A NAME="s3"></A><B><FONT SIZE="+1" FACE="ＭＳ 明朝">３．詳細設計<BR>
+</FONT></B><FONT FACE="ＭＳ 明朝">　<BR>
+　１～２で大まかな仕掛けを説明しましたが、ここではシステム化した詳細な仕様<BR>
+について説明します。<BR>
+　最初に構想した時点の資料をベースにしていますので、細かい部分では今のシス<BR>
+テムと異なる部分がありますが、今後も変わるとおもいますので、現地点への版の<BR>
+修正はおこなっていません。<BR>
+　この資料でシステム化のポイントについては十分理解してもられるとおもいま<BR>
+す。<BR>
+　ここから先の説明はコンピュータシステムの開発経験があることを前提に書いて<BR>
+います。<BR>
+　また関連する環境・ツールの使用経験がないとわからない表現があるかもしれま<BR>
+せん。<BR>
 <BR>
-�傫�������ăf�[�^�E�c�a��̃e�[�u���݌v�Ɖ��H�@�A�����̗���A�T�[�o�E�N��<BR>
-�C�A���g�Ԃ̓d���̊�{�I�Ȉ����̂R�_�ɂ��Đ������܂��B<BR>
-�@��ʐ݌v�i�}���}�V���C���^�[�t�F�[�X�j������Ƃ悢�i�Ȃ��ċ�J���Ă܂��j<BR>
-�̂ł����A���n�_�ł͂���܂���B�Ƃ肠�������ۂ̉�ʂ����Ă��������B<BR>
+大きく分けてデータ・ＤＢ上のテーブル設計と加工法、処理の流れ、サーバ・クラ<BR>
+イアント間の電文の基本的な扱いの３点について説明します。<BR>
+　画面設計（マンマシンインターフェース）もあるとよい（なくて苦労してます）<BR>
+のですが、現地点ではありません。とりあえず実際の画面を見てください。<BR>
 <BR>
-<B>�@�@<A HREF="d_data.html">�R�|�P�@�c�a�\��</A><BR>
+<B>　　<A HREF="d_data.html">３－１　ＤＢ構造</A><BR>
 <BR>
-�@�@<A HREF="d_flow.html">�R�|�Q�@�����̗���</A><BR>
+　　<A HREF="d_flow.html">３－２　処理の流れ</A><BR>
 <BR>
-�@�@<A HREF="d_msg.html">�R�|�R�@�d�@��<BR>
+　　<A HREF="d_msg.html">３－３　電　文<BR>
 </A><BR>
-�@�@<A HREF="d_class.html">�R�|�S�@�A�v���b�g�N���X</A></B></FONT><BR>
-<B><FONT FACE="�l�r ����"><BR>
-�@�@<A HREF="d_cgi.html">�R�|�T�@�T�[�o�b�f�h<BR>
+　　<A HREF="d_class.html">３－４　アプレットクラス</A></B></FONT><BR>
+<B><FONT FACE="ＭＳ 明朝"><BR>
+　　<A HREF="d_cgi.html">３－５　サーバＣＧＩ<BR>
 <BR>
-</A>�@�@<A HREF="d_excep.html">�R�|�U�@��O</A></FONT></B><BR>
+</A>　　<A HREF="d_excep.html">３－６　例外</A></FONT></B><BR>
 <BR>
-<A HREF="envtool.html">prev</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A HREF="inf.html">head</A>�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<A
+<A HREF="envtool.html">prev</A>　　　　　　　　　　　　　　　　　　　<A HREF="inf.html">head</A>　　　　　　　　　　　　　　　　　　　　　　　　　　　<A
 HREF="d_data.html">next</A>
 
 </BODY>
