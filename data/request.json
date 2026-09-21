@@ -1,0 +1,59 @@
+{
+  "model": "gpt-4o-mini",
+  "messages": [
+    {
+      "role": "user",
+      "content": "以下の条件で旅行質問の質問を作成してください。",
+      "name": "user"
+    },
+    {
+      "role": "user",
+      "content": {
+        "task": "create_questions",
+        "parameters": {
+          "title": "旅行先",
+          "questions": [
+            {
+              "text": "出発地はどちらですか？",
+              "answer_type": "text"
+            },
+            {
+              "text": "誰と行きますか？",
+              "answer_type": "single_choice",
+              "options_text": "一人, 二人, 5人以下, 10人以下"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_questions",
+      "description": "質問の質問リストを生成します。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "integer"},
+                "text": {"type": "string"},
+                "type": {"type": "string", "enum": ["text", "single", "multiple"]},
+                "choices": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              },
+              "required": ["id", "text", "type", "choices"]
+            }
+          }
+        },
+        "required": ["questions"]
+      }
+    }
+  ],
+  "function_call": {"name": "create_questions"}
+}

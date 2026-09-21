@@ -1,0 +1,43 @@
+{
+  "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+  "messages": [
+    {
+      "role": "user",
+      "content": "次の条件で質問の質問リストを作成してください。\n\nタイトル: 旅行先\n質問例:\n- 出発地はどちらですか？（自由記述）\n- 誰と行きますか？（一人, 二人, 5人以下, 10人以下）\n- 日程は？（日帰り, ３日ぐらい, ５日ぐらい, １週間ぐらい）\n- 予算は？（２万以下, ５万以下, １０万以下, ２０万以下）\n- 希望・好み（複数選択可）（国内旅行, 海外旅行, 自然, 温泉, グルメ, 歴史・文化, アクティビティ, のんびり, 買い物, 子連れ向け）\n\n以上のような質問をJSON形式（id, text, type, choices）で返してください。"
+    }
+  ],
+  "functions": [
+    {
+      "name": "create_questions",
+      "description": "質問に使用する質問リストを生成します。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "integer" },
+                "text": { "type": "string" },
+                "type": {
+                  "type": "string",
+                  "enum": ["text", "single", "multiple"]
+                },
+                "choices": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              },
+              "required": ["id", "text", "type", "choices"]
+            }
+          }
+        },
+        "required": ["questions"]
+      }
+    }
+  ],
+  "function_call": {
+    "name": "create_questions"
+  }
+}

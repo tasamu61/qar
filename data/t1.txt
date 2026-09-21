@@ -1,0 +1,5 @@
+{
+  "model": "gpt-4o",
+  "messages": [{"role": "user", "content": "おすすめの旅行先は？"}],
+  "temperature": 0.7
+}

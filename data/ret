@@ -1,0 +1,60 @@
+{
+  "questions": [
+    {
+      "choices": [],
+      "id": 1,
+      "text": "\u51fa\u767a\u5730\u306f\u3069\u3061\u3089\u3067\u3059\u304b\uff1f",
+      "type": "text"
+    },
+    {
+      "choices": [
+        "\u4e00\u4eba",
+        "\u4e8c\u4eba",
+        "5\u4eba\u4ee5\u4e0b",
+        "10\u4eba\u4ee5\u4e0b"
+      ],
+      "id": 2,
+      "text": "\u8ab0\u3068\u884c\u304d\u307e\u3059\u304b\uff1f",
+      "type": "single"
+    },
+    {
+      "choices": [
+        "\u65e5\u5e30\u308a",
+        "\uff13\u65e5\u3050\u3089\u3044",
+        "\uff15\u65e5\u3050\u3089\u3044",
+        "\uff11\u9031\u9593\u3050\u3089\u3044"
+      ],
+      "id": 3,
+      "text": "\u65e5\u7a0b\u306f\uff1f",
+      "type": "single"
+    },
+    {
+      "choices": [
+        "\uff12\u4e07\u4ee5\u4e0b",
+        "\uff15\u4e07\u4ee5\u4e0b",
+        "\uff11\uff10\u4e07\u4ee5\u4e0b",
+        "\uff12\uff10\u4e07\u4ee5\u4e0b"
+      ],
+      "id": 4,
+      "text": "\u4e88\u7b97\u306f\uff1f\uff08\u4e00\u4eba\u3042\u305f\u308a\uff09",
+      "type": "single"
+    },
+    {
+      "choices": [
+        "\u56fd\u5185\u65c5\u884c",
+        "\u6d77\u5916\u65c5\u884c",
+        "\u81ea\u7136",
+        "\u6e29\u6cc9",
+        "\u30b0\u30eb\u30e1",
+        "\u6b74\u53f2\u30fb\u6587\u5316",
+        "\u30a2\u30af\u30c6\u30a3\u30d3\u30c6\u30a3",
+        "\u306e\u3093\u3073\u308a",
+        "\u8cb7\u3044\u7269",
+        "\u5b50\u9023\u308c\u5411\u3051"
+      ],
+      "id": 5,
+      "text": "\u5e0c\u671b\u30fb\u597d\u307f\uff08\u8907\u6570\u9078\u629e\u53ef\uff09",
+      "type": "multiple"
+    }
+  ]
+}

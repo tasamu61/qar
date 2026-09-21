@@ -1,0 +1,96 @@
+{
+  "function_call": {
+    "name": "create_questions"
+  },
+  "functions": [
+    {
+      "description": "質問に使用する質問リストを生成します。",
+      "name": "create_questions",
+      "parameters": {
+        "properties": {
+          "questions": {
+            "description": "生成された質問の配列",
+            "items": {
+              "properties": {
+                "choices": {
+                  "description": "選択肢一覧。textタイプでは空配列。",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "id": {
+                  "description": "質問の識別ID",
+                  "type": "integer"
+                },
+                "text": {
+                  "description": "質問の本文テキスト",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "回答形式（text: 自由記述, single: 単一選択, multiple: 複数選択）",
+                  "enum": [
+                    "text",
+                    "single",
+                    "multiple"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "text",
+                "type",
+                "choices"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "questions"
+        ],
+        "type": "object"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": {
+        "parameters": {
+          "questions": [
+            {
+              "answer_type": "text",
+              "text": "出発地はどちらですか？"
+            },
+            {
+              "answer_type": "single_choice",
+              "options_text": "一人, 二人, 5人以下, 10人以下, 11人以上",
+              "text": "誰と行きますか？"
+            },
+            {
+              "answer_type": "single_choice",
+              "options_text": "日帰り, 2日, 3日, 5日, 1週間, 10日, 15日, 16日以上",
+              "text": "日程は？"
+            },
+            {
+              "answer_type": "single_choice",
+              "options_text": "2万以下, 5万以下, 10万以下, 20万以下, 30万以下, 40万以下, 50万以下, 70万以下, 100万以下, 101万以上",
+              "text": "予算は？（一人あたり）"
+            },
+            {
+              "answer_type": "multiple_choice",
+              "description": "利用者が「国内旅行, 海外旅行」の2項目を選択可能とし、残り18項目はAIに生成させる。プロンプト: 「上記以外で旅行の希望・好みとなるキーワードを8個挙げてください。」",
+              "text": "希望・好み（複数選択可）"
+            }
+          ],
+          "title": "旅行先"
+        },
+        "task": "create_questions"
+      },
+      "role": "user"
+    }
+  ],
+  "model": "gpt-4o-mini"
+}

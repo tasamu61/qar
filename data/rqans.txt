@@ -1,0 +1,57 @@
+{
+  "function_call": {
+    "name": "get_result"
+  },
+  "functions": [
+    {
+      "description": "旅行先のおすすめを返す関数",
+      "name": "get_result",
+      "parameters": {
+        "properties": {
+          "result": {
+            "items": {
+              "properties": {
+                "description": {
+                  "description": "その特徴や理由の説明",
+                  "type": "string"
+                },
+                "destination": {
+                  "description": "旅行先",
+                  "type": "string"
+                },
+                "score": {
+                  "description": "おすすめ度スコア（0〜100の数値）",
+                  "type": "number"
+                },
+                "url": {
+                  "description": "関連するのURL",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "destination",
+                "score",
+                "description",
+                "url"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object"
+      }
+    }
+  ],
+  "messages": [
+   {
+      "content": "以下の条件に基づいて旅行先を提案してください。\n\n出発地はどちらですか？ → １\n誰と行きますか？ → 5人以下\n日程は？ → １週間ぐらい\n予算は？（一人あたり） → １０万以下\n希望・好み（複数選択可） → 海外旅行, 自然",
+      "task": "get_result",
+      "role": "user"
+    }
+  ],
+  "model": "gpt-4o-mini"
+}

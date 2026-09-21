@@ -1,0 +1,80 @@
+以下メッセージが返ってきました。
+{
+  "id": "chatcmpl-BYMj1nU4ZDpR5Suww1pn0RDR8sdJ0",
+  "object": "chat.completion",
+  "created": 1747530207,
+  "model": "gpt-4o-mini-2024-07-18",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "function_call": {
+          "name": "create_questions",
+          "arguments": "{\"questions\":[{\"id\":1,\"text\":\"出発地はどちらですか？\",\"type\":\"text\",\"choices\":[]},{\"id\":2,\"text\":\"誰と行きますか？\",\"type\":\"single\",\"choices\":[\"一人\",\"二人\",\"5人以下\",\"10人以下\"]},{\"id\":3,\"text\":\"日程は？\",\"type\":\"single\",\"choices\":[\"日帰り\",\"３日ぐらい\",\"５日ぐらい\",\"１週間ぐらい\"]},{\"id\":4,\"text\":\"予算は？\",\"type\":\"single\",\"choices\":[\"２万以下\",\"５万以下\",\"１０万以下\",\"２０万以下\"]},{\"id\":5,\"text\":\"希望・好み（複数選択可）\",\"type\":\"multiple\",\"choices\":[\"国内旅行\",\"海外旅行\",\"自然\",\"温泉\",\"グルメ\",\"歴史・文化\",\"アクティビティ\",\"のんびり\",\"買い物\",\"子連れ向け\"]}]}"
+        },
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 290,
+    "completion_tokens": 204,
+    "total_tokens": 494,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_129a36352a"
+}
+
+
+          "arguments": "{\"questions\":[{\"id\":1,\"text\":\"出発地はどちらですか？\",\"type\":\"text\",\"choices\":[]},{\"id\":2,\"text\":\"誰と行きますか？\",\"type\":\"single\",\"choices\":[\"一人\",\"二人\",\"5人以下\",\"10人以下\"]},{\"id\":3,\"text\":\"日程は？\",\"type\":\"single\",\"choices\":[\"日帰り\",\"３日ぐらい\",\"５日ぐらい\",\"１週間ぐらい\"]},{\"id\":4,\"text\":\"予算は？\",\"type\":\"single\",\"choices\":[\"２万以下\",\"５万以下\",\"１０万以下\",\"２０万以下\"]},{\"id\":5,\"text\":\"希望・好み（複数選択可）\",\"type\":\"multiple\",\"choices\":[\"国内旅行\",\"海外旅行\",\"自然\",\"温泉\",\"グルメ\",\"歴史・文化\",\"アクティビティ\",\"のんびり\",\"買い物\",\"子連れ向け\"]}]}"
+
+の部分を
+
+        "questions": [
+            {
+                "id": 1,
+                "text": "出発地はどちらですか？",
+                "type": "text",
+                "choices": []
+            },
+            {
+                "id": 2,
+                "text": "誰と行きますか？",
+                "type": "single",
+                "choices": ["一人", "二人", "5人以下", "10人以下"]
+            },
+            {
+                "id": 3,
+                "text": "日程は？",
+                "type": "single",
+                "choices": ["日帰り", "３日ぐらい", "５日ぐらい", "１週間ぐらい"]
+            },
+            {
+                "id": 4,
+                "text": "予算は？（一人あたり）",
+                "type": "single",
+                "choices": ["２万以下", "５万以下", "１０万以下", "２０万以下"]
+            },
+            {
+                "id": 5,
+                "text": "希望・好み（複数選択可）",
+                "type": "multiple",
+                "choices": ["国内旅行", "海外旅行", "自然", "温泉", "グルメ", "歴史・文化", "アクティビティ", "のんびり", "買い物", "子連れ向け"]
+            }
+        ]
+になおして欲しいです。既になってますかね？
