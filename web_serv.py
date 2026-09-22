@@ -1,5 +1,5 @@
 import functools, logging, datetime, threading, time
-from flask import Flask, render_template, request, jsonify, json, Response, session, redirect
+from flask import Flask, render_template, request, jsonify, json, Response, session, redirect, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import uuid, os, importlib
@@ -85,25 +85,31 @@ def get_result():
     return jsonify(mod.get_result(prompt))
 
 @app.route("/static/doc/2002/<path:filename>")
-@aop
-def serve_sjis_file(filename):
-    filepath = os.path.join(app.root_path, "static/doc/2002", filename)
-    with open(filepath, mode='rb') as f:
-        content = f.read()
-    html = content.decode('shift_jis', errors='ignore')
-    wrapped_html = f"""
-    <html>
-    <head><meta charset='Shift_JIS'></head>
-    <body>
-    <div style='font-weight:bold; margin:10px 0;'>2002年の過去のシステムの資料です</div>
-    <div style='border:2px solid #999;padding:12px;margin:10px;'>
-      {html}
-    </div>
-    <!-- IMAGE_INSERT_MARKER -->
-    </body>
-    </html>
-    """
-    return Response(wrapped_html.encode('shift_jis', errors='ignore'), content_type="text/html; charset=Shift_JIS")
+def serve_2002_file(filename):
+    directory = os.path.join(app.root_path, "static/doc/2002")
+
+    # HTML以外（txt, gif, jpg等）は加工せず、そのまま配信する。
+    # text/plain なら改行・空白がブラウザ上でも保持され、
+    # 画像も正しいContent-Typeで返される。
+    if not filename.lower().endswith((".html", ".htm")):
+        return send_from_directory(directory, filename)
+
+    filepath = os.path.join(directory, filename)
+    with open(filepath, mode='r', encoding='utf-8') as f:
+        html = f.read()
+
+    # 2002年版の注記を、元のHTML文書を壊さずbody先頭へ追加する
+    notice = "<div style='font-weight:bold; margin:10px 0;'>2002年の過去のシステムの資料です</div>"
+    lower_html = html.lower()
+    body_pos = lower_html.find('<body')
+    if body_pos != -1:
+        body_end = html.find('>', body_pos)
+        if body_end != -1:
+            html = html[:body_end + 1] + notice + html[body_end + 1:]
+    else:
+        html = notice + html
+
+    return Response(html, content_type="text/html; charset=utf-8")
 
 @app.after_request
 def add_image_to_html(response: Response) -> Response:
