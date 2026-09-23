@@ -1,21 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QARシステムの経緯と現状</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QARシステムの経緯と現状</title>
+<style>
+:root{--navy:#06457f;--blue:#0b70b8;--cyan:#18a7c7;--line:#b9dff1;--pale:#eef9ff;--text:#17344f}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Yu Gothic","Meiryo",sans-serif;color:var(--text);background:#fff;line-height:1.65}
+main{max-width:1080px;margin:auto;padding:28px 20px 60px}
+h1{font-size:36px;color:var(--navy);margin:0 0 20px}
+h2{font-size:27px;color:var(--navy);border-left:6px solid var(--blue);padding-left:10px;margin:38px 0 18px}
+h3{color:var(--navy);margin:.25em 0 .55em}
+a{color:#0875ba}
+.history{background:#f7fbfe;border:1px solid #d2e7f3;border-radius:12px;padding:20px 25px}
+.poster{background:linear-gradient(180deg,#f4fbff 0,#fff 45%);border:1px solid #c9e4f3;border-radius:14px;padding:18px;margin-top:15px}
+.poster-title{font-size:34px;font-weight:900;color:var(--navy);line-height:1.18}
+.poster-sub{font-size:20px;font-weight:800;color:#0a66a6;margin:4px 0 14px}
+.hero-top{display:grid;grid-template-columns:1.55fr 1fr;gap:12px;align-items:stretch}
+.hero-left{display:flex;flex-direction:column;justify-content:space-between}
+.hero-lead{font-size:16px;margin:4px 0 10px}
+.hero-main{width:100%;height:310px;object-fit:cover;border-radius:8px}
+.choice-row{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.choice-row img{width:100%;height:130px;object-fit:cover}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+.card,.arch{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;box-shadow:0 2px 7px #0b5c8d10}
+.flow .card{min-height:210px}
+.num{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font-weight:900;margin-right:5px;font-size:20px}
+.small{font-size:13px;line-height:1.55}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.thumb{width:100%;height:145px;object-fit:cover;border-radius:7px;margin:5px 0 8px}
+.tags span{display:inline-block;background:#dceffd;color:#075394;border-radius:14px;padding:2px 8px;margin:2px;font-size:12px}
+.feature-card{display:grid;grid-template-columns:42px 1fr;gap:8px;align-items:start}
+.feature-icon{font-size:28px;color:var(--navy);line-height:1}
+.archgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.arch h3{background:linear-gradient(#0b76bd,#075a9c);color:#fff;margin:-12px -12px 10px;padding:7px 9px;border-radius:9px 9px 0 0;font-size:16px}
+.arch.dev{background:#f0faf3}
+.status{display:inline-block;background:#e8f7ec;color:#28733d;padding:3px 8px;border-radius:10px;font-size:12px;font-weight:700}
+.process{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.process .card{min-height:190px}
+.footer-note{margin-top:18px;padding-top:10px;border-top:1px solid #8dbbd6;font-size:14px;color:#315d7d}
+ul{padding-left:20px;margin:.35em 0}
+@media(max-width:850px){
+ .hero-top,.grid3,.grid4,.archgrid,.process,.flow{grid-template-columns:1fr 1fr}
+ .poster-title{font-size:28px}
+}
+@media(max-width:540px){
+ main{padding:20px 10px}
+ .hero-top,.grid3,.grid4,.archgrid,.process,.flow{grid-template-columns:1fr}
+ h1{font-size:29px}
+}
+</style>
 </head>
-<body>
-    <p>2002年にフロントがJavaアプレット、バックエンドにPostgreSQLで独自のスコアリング<br>による回答選択の方法を用いた<a href="/static/doc/2002/inf.html">QAR</a>を開発しました。</p>
+<body><main>
+<h1>QARシステム</h1>
+<section class="history">
+<p>
+あるテーマについて利用者に質問し、その回答から提案をするシステムがQARです。
+</p>
 
-    <p>それを現在の技術、フロントがJavaScript (Vue.js)、バックエンドをAI LLMを使用した<br>ものに置き換えたものです。</p>
+<p>
+2000年頃に発案し、2002年にフロントにJavaアプレット、
+バックエンドにPostgreSQLを使用して開発しました。
+</p>
 
-    <p>一般にはAIのプロンプト改善と言われるものらしいです。AIの勉強をしたいとおもって<br>ChatGPTに質問している際、昔作ったものが実用レベルになるかもしれないとおもい<br>作成してみました。</p>
+<p>
+当時は、データを十分に準備することが難しく、
+固定的な評価方法では利用者の多様な希望に対応できない部分もあり、
+実用には至りませんでした。
+</p>
 
-    <p>2002年のシステムは膨大なデータ量が準備できず、また効果的な選択を行えない<br>部分があり実用に達しませんでした。</p>
+<p><a href="2002/inf.html">→ 2002年版QARの資料</a></p>
 
-    <p>さて今回は実用レベルでしょうか？</p>
-    <p>今回の資料はまだできてません。前回(2002年作成)の<a href="/static/doc/2002/inf.html">QAR</a>を参考に見てください</p>
+<h2 style="margin-top:32px">AIを利用したQAR <a href="https://qar.tasamu.org">システムへ</a></h2>
 
-</body>
-</html>
+<p>
+その後20年以上が経ち、AI・LLMの発展によって、
+当時考えていたQARを現在の技術で実現できるのではないかと考え、
+AIを利用したQARとして再構築しました。
+</p>
+
+<p>
+現在はJavaScript（Vue.js）、Flaskを使用し、
+OpenAI・Gemini・Groqなど複数のLLMを利用できる構成としています。
+</p>
+
+<p>
+しかし、現状では既存のWeb検索や一般的なAI利用との差別化が
+十分にできているとは言えません。
+そのため、独自LLM、RAGなどの活用や、さらなるカスタマイズを検討しながら、
+QAR独自の推薦システムとして発展させることを目指しています。
+</p>
+</section>
+
+<h2>利用イメージ</h2>
+<div class="poster">
+  <div class="hero-top">
+    <div class="hero-left">
+      <div>
+        <div class="poster-title">QAR 2.0<br>対話で見つける、あなただけの旅</div>
+        <div class="poster-sub">AIと対話しながら、理想の旅行先を一緒に見つけるレコメンドシステム</div>
+        <p class="hero-lead">漠然とした希望からでも大丈夫。いくつかの質問に答えることで、あなたの好みに合った旅先をAIが提案します。</p>
+      </div>
+      <div class="choice-row">
+        <img src="img/choice_sea.jpg" alt="海のイメージ">
+        <img src="img/choice_sunset.jpg" alt="夕景のイメージ">
+        <img src="img/choice_mountain.jpg" alt="山のイメージ">
+      </div>
+    </div>
+    <img class="hero-main" src="img/hero.jpg" alt="南国リゾートのイメージ">
+  </div>
+
+  <h3 style="margin-top:18px">QAR 2.0の流れ</h3>
+  <div class="flow">
+    <div class="card"><span class="num">1</span><b>希望を入力</b><p class="small">海がきれい・1週間・ダイビング・シュノーケル・島でのんびり…など、思いつくまま入力。</p></div>
+    <div class="card"><span class="num">2</span><b>質問に回答</b><p class="small">QARが提示する質問に、選択・数値・自由文などで回答。</p></div>
+    <div class="card"><span class="num">3</span><b>AIが候補を提案</b><p class="small">回答内容をもとに、AIが旅行先候補を提案。</p></div>
+    <div class="card"><span class="num">4</span><b>比較・検討</b><p class="small">候補の特徴や理由を見ながら比較。</p></div>
+    <div class="card"><span class="num">5</span><b>旅を計画</b><p class="small">気に入った旅先が見つかったら、旅行計画へ。</p></div>
+  </div>
+
+  <h3>提案例（イメージ）</h3>
+  <div class="grid3">
+    <div class="card">
+      <img class="thumb" src="img/maldives.jpg" alt="モルディブのイメージ">
+      <h3>モルディブ</h3>
+      <div class="tags"><span>海が美しい</span><span>島でのんびり</span><span>ダイビング</span></div>
+      <p>透明度の高い海と豊かな海中環境。ハウスリーフで毎日シュノーケル・ダイビングを楽しめます。</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="img/palau.jpg" alt="パラオのイメージ">
+      <h3>パラオ</h3>
+      <div class="tags"><span>魚影が濃い</span><span>ダイビング</span><span>自然</span></div>
+      <p>ダイナミックな海中景観と豊富な海洋生物。ボートで多彩なポイントを巡るスタイルです。</p>
+    </div>
+    <div class="card">
+      <img class="thumb" src="img/philippines.jpg" alt="フィリピンの離島のイメージ">
+      <h3>フィリピンの離島</h3>
+      <div class="tags"><span>素朴な滞在</span><span>海が美しい</span><span>コスト柔軟</span></div>
+      <p>小さな島でのんびり過ごせる。シュノーケルとダイビングの両方を楽しめるスポットも豊富です。</p>
+    </div>
+  </div>
+
+  <h3>QAR 2.0の特徴</h3>
+  <div class="grid4">
+    <div class="card feature-card"><div class="feature-icon">◯</div><div><b>対話形式で簡単入力</b><p class="small">曖昧な希望でも、質問への回答を通して条件を整理。</p></div></div>
+    <div class="card feature-card"><div class="feature-icon">▤</div><div><b>信頼できる情報</b><p class="small">旅行先情報とAIの知識を組み合わせる方向で拡張。</p></div></div>
+    <div class="card feature-card"><div class="feature-icon">♡</div><div><b>あなたに合った提案</b><p class="small">数値だけでなく、分かりやすい説明を添えて提案。</p></div></div>
+  </div>
+</div>
+
+<h2>システム構成</h2>
+<div class="poster">
+<div class="poster-title">プロンプト入力改善によるAI連携 QARシステム構成概要</div>
+<div class="poster-sub">対話型入力・LLM・旅行先評価を組み合わせた旅行推薦システム</div>
+<h3>1. システムの目的</h3>
+<ul><li>利用者の曖昧な希望から、適した旅行先を提案する</li><li>選択入力・数値入力・自由文などで入力負荷を下げる</li><li>内部では候補地評価を行い、画面では分かりやすく提案する</li></ul>
+<h3>システム構成図</h3>
+<div class="archgrid">
+ <div class="arch"><h3>A. 利用者</h3><p>PC・スマートフォンから利用</p><p>質問・選択などを入力し、推薦結果を画面で確認。</p></div>
+ <div class="arch"><h3>B. UI / フロントエンド</h3><ul><li>質問表示</li><li>選択 / 数値 / 自由文入力</li><li>推薦結果表示</li></ul><b>Web UI / Vue.js</b></div>
+ <div class="arch"><h3>C. アプリケーション層</h3><ul><li>セッション管理</li><li>入力正規化</li><li>プロンプト生成</li><li>推薦フロー制御</li></ul><b>Flask</b></div>
+ <div class="arch"><h3>D. AI オーケストレーション</h3><ul><li>利用者入力の解釈</li><li>候補説明の生成</li><li>モデル切替</li></ul><b>OpenAI / Gemini / Groq</b><p><span class="status">自営LLMは開発中</span></p></div>
+ <div class="arch"><h3>E. 推薦エンジン</h3><ul><li>嗜好プロファイル</li><li>利用者絞り込み</li><li>内部スコア計算</li><li>比較候補生成</li></ul><p><span class="status">継続開発</span></p></div>
+</div>
+<div class="archgrid" style="margin-top:12px">
+ <div class="arch"><h3>H. ログ / 評価</h3><ul><li>対話履歴</li><li>利用者フィードバック</li><li>LLM比較・改善</li><li>API利用状況</li></ul></div>
+ <div class="arch dev"><h3>G. 外部情報 / 拡張</h3><ul><li>航空便・参考運賃</li><li>天候 / 季節情報</li><li>地図 / 周辺情報</li></ul><span class="status">将来拡張</span></div>
+ <div class="arch dev" style="grid-column:span 3"><h3>F. 知識・データ層</h3><div class="grid3"><div><b>旅行先データ</b><ul><li>地域・海・季節</li><li>費用・雰囲気</li><li>体験 / アクティビティ</li></ul></div><div><b>RAG / 検索基盤</b><ul><li>Embedding</li><li>FAISS</li><li>旅行情報検索</li></ul><span class="status">RAGは開発中</span></div><div><b>旧QAR知識</b><ul><li>旧評価軸</li><li>旧方式との比較</li></ul></div></div></div>
+</div>
+<h3>2. 推薦処理の流れ</h3>
+<div class="process">
+ <div class="card"><span class="num">1</span><b>初期希望を入力</b><p class="small">行きたい時期・エリア・予算・やりたいことなどを入力。</p></div>
+ <div class="card"><span class="num">2</span><b>質問を提示</b><p class="small">希望を整理するための質問を表示。</p></div>
+ <div class="card"><span class="num">3</span><b>回答を収集</b><p class="small">選択・数値・自由文などで回答。</p></div>
+ <div class="card"><span class="num">4</span><b>候補を評価</b><p class="small">収集した情報をもとに候補を評価。</p></div>
+ <div class="card"><span class="num">5</span><b>候補を比較し説明生成</b><p class="small">候補を比較し、それぞれの特徴や理由を生成。</p></div>
+ <div class="card"><span class="num">6</span><b>推薦結果を提示</b><p class="small">旅行先を分かりやすく表示。</p></div>
+</div>
+<div class="grid3" style="margin-top:16px">
+ <div class="card"><h3>現行版</h3><ul><li>複数LLMを切り替えて利用</li><li>質問・回答を使った推薦</li><li>Google Cloud上で運用</li></ul></div>
+ <div class="card dev"><h3>現在開発中</h3><ul><li>自営LLMの活用</li><li>RAG / 検索基盤の充実</li><li>旅行知識との連携強化</li></ul></div>
+ <div class="card dev"><h3>今後の発展</h3><ul><li>外部API連携</li><li>評価実験と精度改善</li><li>より実用的な旅行推薦へ</li></ul></div>
+</div>
+<p class="footer-note">QAR = Question Answer Result ／ AIで「検索」ではなく「提案」を目指す</p>
+</div>
+</main></body></html>
